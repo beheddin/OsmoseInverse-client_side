@@ -1,0 +1,68 @@
+<mat-toolbar>
+  <button
+    mat-icon-button
+    class="left-btn"
+    routerLinkActive="active"
+    routerLink=""
+    (click)="handleMenuBtnClick()"
+  >
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="spacer"></span>
+
+  <h5 *ngIf="userIsAuthenticated">{{ message }}</h5>
+  <!-- <h5> -->
+  <!-- {{ message }} -->
+  <!-- </h5> -->
+
+  <span class="spacer"></span>
+
+  <div *ngIf="!userIsAuthenticated">
+    <button
+      mat-raised-button
+      class="right-btn"
+      routerLink="register"
+      routerLinkActive="active"
+    >
+      <mat-icon>app_registration</mat-icon>
+      Register
+    </button>
+
+    <button
+      mat-raised-button
+      class="right-btn"
+      routerLink="login"
+      routerLinkActive="active"
+    >
+      <mat-icon>login</mat-icon>
+      Login
+    </button>
+  </div>
+
+  <div *ngIf="userIsAuthenticated">
+    <button
+      mat-button
+      [matMenuTriggerFor]="profile"
+      color="primary"
+      class="right-btn"
+    >
+      <mat-icon>person</mat-icon>
+    </button>
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item routerLinkActive="active" routerLink="profile">
+        <mat-icon>settings</mat-icon>
+        Settings
+      </button>
+      <button
+        mat-menu-item
+        routerLinkActive="active"
+        routerLink="login"
+        (click)="logout()"
+      >
+        <mat-icon>logout</mat-icon>
+        Log out
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>
