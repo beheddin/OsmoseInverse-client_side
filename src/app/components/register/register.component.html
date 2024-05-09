@@ -1,0 +1,63 @@
+
+<div class="auth-form">
+    <form #form="ngForm" (ngSubmit)="submit(form)">
+      <mat-form-field>
+        <mat-label>First name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="firstName"
+          [(ngModel)]="register.firstName"
+          #firstName="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last name</mat-label>
+        <input
+          matInput
+          type="text"
+          name="lastName"
+          [(ngModel)]="register.lastName"
+          #lastName="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="text"
+          name="email"
+          [(ngModel)]="register.email"
+          #email="ngModel"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cin</mat-label>
+        <input
+          matInput
+          type="text"
+          name="cin"
+          [(ngModel)]="register.cin"
+          #cin="ngModel"
+        />
+      </mat-form-field>
+  
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          name="password"
+          [(ngModel)]="register.password"
+          #password="ngModel"
+        />
+      </mat-form-field>
+      <!-- {{ form.value | json }} -->
+      <!-- {{ register | json }} -->
+  
+      <button mat-flat-button type="submit" class="fullwidth-btn" color="primary" [disabled]="">
+        Register
+      </button>
+    </form>
+  </div>
+  
