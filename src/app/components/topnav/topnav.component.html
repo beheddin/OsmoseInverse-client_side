@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <button
+  <!-- <button
     mat-icon-button
     class="left-btn"
     routerLinkActive="active"
@@ -7,62 +7,73 @@
     (click)="handleMenuBtnClick()"
   >
     <mat-icon>menu</mat-icon>
-  </button>
+  </button> -->
 
   <span class="spacer"></span>
+  <!-- <h6 *ngIf="userIsAuthenticated">{{ message }}</h6> -->
+  <!-- <h6> -->
+  <!-- {{ message }} -->
+  <!-- </h6> -->
+  <!-- <span class="spacer"></span> -->
 
-  <h5 *ngIf="userIsAuthenticated">{{ message }}</h5>
-  <!-- <h5>
-  {{ message }}
-  </h5> -->
+  <div *ngIf="authService.isLoggedIn(); else loginTemplate">
+    <!-- <div *ngIf="isLoggedIn()"> -->
+    <!-- <div *ngIf="userIsAuthenticated"> -->
+    <div *ngIf="authService.getUserDetails() as userDetails">
+      <!-- <div>{{ userDetails?.fullName }}</div> -->
+      <!-- </div> -->
 
-  <span class="spacer"></span>
+      <button
+        mat-button
+        [matMenuTriggerFor]="profileMenu"
+        color="primary"
+        class="right-btn"
+      >
+        <span>
+          {{ userDetails?.firstName }} {{ userDetails?.lastName[0] }}.</span
+        >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLinkActive="active" routerLink="/profile">
+        <!-- <button mat-menu-item [routerLink]="['profile', 1]"> -->
+        <mat-icon>person</mat-icon>
+        <span> My Profile </span>
+      </button>
+      <!-- <button mat-menu-item routerLinkActive="active" routerLink="/settings">
+      <mat-icon>settings</mat-icon>
+      Settings
+    </button> -->
 
-  <div *ngIf="!userIsAuthenticated">
-    <button
-      mat-raised-button
-      class="right-btn"
-      routerLink="register"
-      routerLinkActive="active"
-    >
-      <mat-icon>app_registration</mat-icon>
-      Register
-    </button>
-
-    <button
-      mat-raised-button
-      class="right-btn"
-      routerLink="login"
-      routerLinkActive="active"
-    >
-      <mat-icon>login</mat-icon>
-      Login
-    </button>
-  </div>
-
-  <div *ngIf="userIsAuthenticated">
-    <button
-      mat-button
-      [matMenuTriggerFor]="profile"
-      color="primary"
-      class="right-btn"
-    >
-      <mat-icon>person</mat-icon>
-    </button>
-    <mat-menu #profile="matMenu">
-      <button mat-menu-item routerLinkActive="active" routerLink="profile">
-        <mat-icon>settings</mat-icon>
-        Settings
+      <button mat-menu-item routerLinkActive="active" routerLink="/register">
+        <mat-icon>app_registration</mat-icon>
+        <span> Register </span>
       </button>
       <button
         mat-menu-item
         routerLinkActive="active"
-        routerLink="login"
+        routerLink="/login"
         (click)="logout()"
       >
         <mat-icon>logout</mat-icon>
-        Log out
+        <span>Log out</span>
       </button>
     </mat-menu>
+    <!-- </div> -->
   </div>
+
+  <!-- <div *ngIf="!userIsAuthenticated"> -->
+  <!-- <div *ngIf="!isLoggedIn()"> -->
+  <ng-template #loginTemplate>
+    <button
+      mat-raised-button
+      class="right-btn"
+      routerLinkActive="active"
+      routerLink="/login"
+    >
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button>
+  </ng-template>
 </mat-toolbar>

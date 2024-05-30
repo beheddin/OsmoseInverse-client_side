@@ -1,0 +1,84 @@
+<div class="form-container">
+  <form #loginForm="ngForm" (ngSubmit)="submit(loginForm)">
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field>
+          <mat-label>Cin</mat-label>
+          <input
+            matInput
+            type="text"
+            name="cin"
+            #cin="ngModel"
+            [(ngModel)]="login.cin"
+            required
+            minlength="3"
+          />
+
+          <!-- alert msgs -->
+          <mat-error *ngIf="cin.touched && cin.pristine">
+            <!-- <mat-error *ngIf="cin.invalid && cin.touched"> -->
+            Cin is required
+            </mat-error>
+          <mat-hint *ngIf="cin.invalid && cin.dirty">
+            <!-- <mat-hint *ngIf="cin.errors?.['minlength'] && cin.touched"> -->
+            Cin must contain at least
+            {{ cin.errors?.['minlength']?.requiredLength }}
+            characters
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="{{ hidePwd ? 'password' : 'text' }}"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="login.password"
+            required
+            minlength="1"
+          />
+          <mat-icon 
+          matSuffix 
+          (click)="hidePwd = !hidePwd"
+          aria-label="Toggle password visibility"
+          [attr.aria-pressed]="!hidePwd">
+            {{ hidePwd ? "visibility_off" : "visibility" }}
+          </mat-icon
+          >
+          <!-- alert msgs -->
+          <mat-error *ngIf="password.touched && password.pristine">
+            <!-- <mat-error *ngIf="password.invalid && password.touched"> -->
+            Password is required
+            </mat-error>
+          <mat-hint *ngIf="password.invalid && password.dirty">
+          <!-- <mat-hint *ngIf="password.errors?.['minlength'] && password.touched"> -->
+            Password must contain at least
+            {{ password.errors?.['minlength']?.requiredLength }}
+            characters
+            </mat-hint>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          type="submit"
+          class="fullwidth-btn"
+          color="primary"
+          [disabled]="loginForm.invalid"
+        >
+          Login
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </form>
+  <!-- {{ loginForm.value | json }} -->
+
+  <!-- login: var declared in .ts file -->
+  <!-- {{ login | json }} -->
+
+  <!-- Form controls -->
+  <!-- {{ password.valid | json }}
+  {{ password.status | json }}
+  {{ password.touched | json }}
+  {{ password.errors | json }} -->
+</div>

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { MaterialModule } from '../../material.module';
 import { FormsModule } from '@angular/forms';
 import { JsonPipe } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 
-import { Register } from '../../models/register/register';
+import { MaterialModule } from '../../material.module';
+import { Register } from '../../models/register';
 
 @Component({
   selector: 'app-register',
@@ -21,12 +21,26 @@ import { Register } from '../../models/register/register';
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  register: Register = new Register('', '', '', '', '');
+  register: Register = new Register('', '', '', '', '', '', '');  //template-driven form
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  submit(form: any) {
-    console.log(form.value);
-    this.router.navigate(['login']);
+  submit(registerForm: any) {
+    if (registerForm.invalid) return;
+
+    if (
+      !this.verifyPassword(
+        registerForm.value.password,
+        registerForm.value.confirmPassword
+      )
+    )
+      console.log("pwds don't match");
+
+    console.log(registerForm.value);
+    //this.router.navigate(['login']);
+  }
+
+  verifyPassword(password: string, confirmPassword: string): boolean {
+    return password === confirmPassword;
   }
 }

@@ -1,47 +1,67 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+
+  OnInit,
+
+  inject,
+} from '@angular/core';
 import { MaterialModule } from '../../material.module';
-import { NgIf } from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { CommonModule, NgIf } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterModule } from '@angular/router';
+// import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { Emitter } from '../../emitter';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-topnav',
   standalone: true,
-  imports: [MaterialModule, MatIcon, NgIf, HttpClientModule, RouterModule],
+  imports: [
+    MaterialModule,
+    MatIconModule,
+    NgIf,
+    CommonModule,
+    // HttpClientModule,
+    RouterModule,
+  ],
   templateUrl: './topnav.component.html',
   styleUrl: './topnav.component.scss',
 })
 export class TopnavComponent implements OnInit {
-  userIsAuthenticated: boolean;
-  // @Input() userIsAuthenticated: boolean = false;
+  // loginStatus: Observable<boolean> | undefined;
+  // cin: Observable<string> | undefined;
+  // firstName: Observable<string> | undefined;
 
+  // userIsAuthenticated: boolean = false;
   // menuBtnIsClicked: boolean = false;
-  menuBtnIsClicked: boolean;
-  // @Input() message: string = '';
-  message: string = '';
+  // messageN: string = '';
+  userDetails: any = null;
 
-  constructor(private httpClient: HttpClient) {
-    this.menuBtnIsClicked = false;
-    this.userIsAuthenticated = false;
-  }
+  authService = inject(AuthService);
+  router = inject(Router);
+  matSnackBar = inject(MatSnackBar);
+
+  constructor() {} //private accountService: AccountService //inject the service // private httpClient: HttpClient
 
   ngOnInit(): void {
-    // this.httpClient.get(
-    //   // 'https://localhost:44386/Users/authenticatedUser',
-    //   // 'http://localhost:13462/Users/authenticatedUser',
-    //   'https://localhost:5001/Users/authenticatedUser',
-    //   { withCredentials: true }
-    // ).subscribe((res: any) => {
+    //this.loginStatus = this.accountService.loginStatus;
+    // this.cin = this.accountService.cin;
+    // this.httpClient
+    //   .get(
+    //     // 'https://localhost:44386/Users/authenticatedUser',
+    //     // 'http://localhost:13462/Users/authenticatedUser',
+    //     'https://localhost:5001/Users/authenticatedUser',
+    //     { withCredentials: true }
+    //   )
+    // .subscribe((res: any) => {
     //   // this.message = `Hi ${res.fullName}`;
+    //   //console.log(res);
     //   this.userIsAuthenticated = true;
-    //   console.log(res);
     // });
-
-    //displays the name of the authenticated user in the topnav
     // this.httpClient
     //   .get(
     //     // 'https://localhost:44386/Users/authenticatedUser',
@@ -52,49 +72,36 @@ export class TopnavComponent implements OnInit {
     //   .pipe(
     //     tap({
     //       next: (res: any) => {
-    //         this.message = `Hi ${res.fullName}`;
-    //         console.log(res);
-
-    //         // Emitter.userIsAuthenticatedEmitter.emit(true); //if the user is authenticated, we emit an event with the value true
-    //         Emitter.userIsAuthenticatedEmitter.emit({
-    //           isAuthenticated: true,
-    //           fullName: res.fullName,
-    //         }); //if the user is authenticated, we emit an event with the value true
+    //         console.log('next');
+    //         Emitter.userIsAuthenticatedEmitter.subscribe(
+    //           (isAuthenticated: boolean) => {
+    //             this.userIsAuthenticated = isAuthenticated;
+    //           }
+    //         );
     //       },
-    //       error: (err) => {
+    //       error: () => {
     //         // this.message = 'You are not logged in.';
-    //         //console.log(err);
-
-    //         // Emitter.userIsAuthenticatedEmitter.emit(false); //if the user is not authenticated, we emit an event with the value false
-    //         Emitter.userIsAuthenticatedEmitter.emit({
-    //           isAuthenticated: true,
-    //           fullName: '',
-    //         });
+    //         console.log('err');
     //       },
     //     })
     //   )
-    //   .subscribe();
-
+    //   .subscribe((res) => {
+    //     console.log('res');
+    //     this.message = `Hi ${res.fullName}`;
+    //   });
     /*the below code is depracated and replaced by the code above*/
     // .subscribe(
     //   (res: any) => {
     //     this.message = `Hi ${res.fullName}`;
     //     console.log(res);
-
     //     Emitters.authEmitter.emit(true);
     //   },
     //   (err) => {
     //     this.message = 'You are not logged in.';
     //     console.log(err);
-
     //     Emitters.authEmitter.emit(false);
     //   }
     // );
-
-    // Emitter.userIsAuthenticatedEmitter.subscribe((isAuthenticated: boolean) => {
-    //   this.userIsAuthenticated = isAuthenticated;
-    // });
-
     // Emitter.userIsAuthenticatedEmitter.subscribe(
     //   ({ isAuthenticated, fullName }) => {
     //     if (isAuthenticated && fullName) {
@@ -104,53 +111,77 @@ export class TopnavComponent implements OnInit {
     //     }
     //   }
     // );
-
-    Emitter.userIsAuthenticatedEmitter.subscribe((isAuthenticated: boolean) => {
-      if (isAuthenticated) {
-        this.userIsAuthenticated = true;
-        this.httpClient
-          .get('https://localhost:5001/Users/authenticatedUser', {
-            withCredentials: true,
-          })
-          .subscribe((res: any) => {
-            // console.log(res);
-            this.message = `Hi ${res.fullName}`;
-          });
-      } else {
-        this.userIsAuthenticated = false;
-      }
-    });
-
+    // Emitter.userIsAuthenticatedEmitter.subscribe((isAuthenticated: boolean) => {
+    //   if (isAuthenticated) {
+    //     this.userIsAuthenticated = true;
+    //     this.httpClient
+    //       .get('https://localhost:5001/Users/authenticatedUser', {
+    //         withCredentials: true,
+    //       })
+    //       .subscribe((res: any) => {
+    //         // console.log(res);
+    //         this.message = `Hi ${res.fullName}`;
+    //       });
+    //   } else {
+    //     this.userIsAuthenticated = false;
+    //   }
+    // });
     // Emitter.sidenavIsOpenEmitter.subscribe((isOpen: boolean) => {
     // Emitter.sidenavIsOpenEmitter.subscribe(({ isOpen }) => {
     //   this.menuBtnIsClicked = isOpen;
     // });
   }
 
-  // ngOnChanges(): void {
-  //   console.log('ngOnChanges');
-  //   console.log(this.userIsAuthenticated);
+  handleMenuBtnClick(): void {
+    console.log('menu btn clicked');
+  }
+
+  // isLoggedIn(): boolean {
+  //   return this.authService.isLoggedIn();
   // }
 
-  logout(): void {
-    this.httpClient
-      .post(
-        // 'https://localhost:44386/Users/logout',
-        // 'http://localhost:13462/Users/logout',
-        'https://localhost:5001/Users/logout',
-        {},
-        { withCredentials: true }
-      )
-      .subscribe(() => {
-        this.userIsAuthenticated = false;
-        // this.message = '';
-      });
-  }
+  logout = () => {
+    this.authService.logout();
+    this.matSnackBar.open('User successfully logged out', 'Close', {
+      duration: 5000,
+      horizontalPosition: 'center',
+    });
+    this.router.navigate(['/login']);
+  };
 
-  handleMenuBtnClick(): void {
-    //console.log('menu btn clicked');
-    this.menuBtnIsClicked = !this.menuBtnIsClicked;
-
-    Emitter.sidenavIsOpenEmitter.emit(this.menuBtnIsClicked);
-  }
+  // //method 2
+  // logout(): void {
+  //   // this.authService.logout();
+  //   this.authService.logout().subscribe((response: any) => {
+  //     next: (response: any) => {
+  //       this.matSnackBar.open(response.message, 'Close', {
+  //         duration: 5000,
+  //         horizontalPosition: 'center',
+  //       });
+  //       this.router.navigate(['/login']);
+  //     }
+  //   })
+  // }
 }
+
+// logout(): void {
+//   this.httpClient
+//     .post(
+//       // 'https://localhost:44386/Users/logout',
+//       // 'http://localhost:13462/Users/logout',
+//       'https://localhost:5001/Users/logout',
+//       {},
+//       { withCredentials: true }
+//     )
+//     .subscribe(() => {
+//       this.userIsAuthenticated = false;
+//       // this.message = '';
+//     });
+// }
+
+// handleMenuBtnClick(): void {
+//   //console.log('menu btn clicked');
+//   this.menuBtnIsClicked = !this.menuBtnIsClicked;
+
+//   Emitter.sidenavIsOpenEmitter.emit(this.menuBtnIsClicked);
+// }
