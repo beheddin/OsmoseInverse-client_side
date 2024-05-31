@@ -34,16 +34,16 @@ export class LoginComponent {
   //Ensure to unsubscribe from the observable to avoid memory leaks. This can be done using the takeUntil operator with a Subject.
   // private destroy$ = new Subject<void>();
 
-  // //dependencies injection
-  // authService = inject(AuthService); //inject the service
-  // matSnackBar = inject(MatSnackBar); //display success/error msg after login
-  // router = inject(Router);
+  //dependencies injection
+  authService = inject(AuthService); //inject the service
+  matSnackBar = inject(MatSnackBar); //display success/error msg after login
+  router = inject(Router);
 
-  constructor(
-    private authService: AuthService,
-    private matSnackBar: MatSnackBar,
-    private router: Router
-  ) {}
+  // constructor(
+  //   private authService: AuthService,
+  //   private matSnackBar: MatSnackBar,
+  //   private router: Router
+  // ) {}
 
   onSubmit(loginForm: any): void {
     if (loginForm.valid) {

@@ -1,5 +1,4 @@
 export interface User {
-  // id: string;
   userId: string;
   firstName: string;
   lastName: string;
@@ -7,5 +6,6 @@ export interface User {
   cin: string;
   password: string;
   access: boolean;
-  role: string;
+  roleLabel: string;
+  filialeLabel: string;
 }

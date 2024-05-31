@@ -49,7 +49,9 @@
           </mat-error> -->
           <mat-error *ngIf="email.invalid && email.touched">
             <span *ngIf="email.errors?.['required']">Email is required</span>
-            <span *ngIf="email.errors?.['email']">Please enter a valid email address</span>
+            <span *ngIf="email.errors?.['email']"
+              >Please enter a valid email address</span
+            >
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill">
@@ -61,9 +63,12 @@
             [(ngModel)]="register.role"
             required
           >
-            <mat-option *ngFor="let role of roles" [value]="role">{{
-              role
-            }}</mat-option>
+            <!-- use 'async' pipe to subscribe to the roles observable in the template -->
+            <mat-option
+              *ngFor="let role of roles$ | async"
+              [value]="role.roleLabel"
+              >{{ role.roleLabel }}</mat-option
+            >
           </mat-select>
           <!-- <input
             matInput
@@ -143,15 +148,12 @@
             (ngModelChange)="validatePasswords()"
           />
           <!-- alert msgs -->
-          <mat-error *ngIf="confirmPassword.touched && confirmPassword.pristine">
+          <mat-error
+            *ngIf="confirmPassword.touched && confirmPassword.pristine"
+          >
             Required field
           </mat-error>
-          <mat-hint
-            *ngIf="
-              confirmPassword.touched &&
-              !passwordsMatch
-            "
-          >
+          <mat-hint *ngIf="confirmPassword.touched && !passwordsMatch">
             Passwords don't match
           </mat-hint>
         </mat-form-field>
@@ -160,10 +162,7 @@
           type="submit"
           color="primary"
           class="fullwidth-btn"
-          [disabled]="
-            registerForm.invalid ||
-            !passwordsMatch
-          "
+          [disabled]="registerForm.invalid || !passwordsMatch"
         >
           Register
         </button>

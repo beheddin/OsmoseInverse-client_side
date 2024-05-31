@@ -21,13 +21,13 @@ export class AuthService implements OnInit {
   private tokenKey: string = 'jwt';
   private http = inject(HttpClient);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  // constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const value = localStorage.getItem('jwt');
-      console.log(value);
-    }
+    // if (isPlatformBrowser(this.platformId)) {
+    //   const value = localStorage.getItem('jwt');
+    //   console.log(value);
+    // }
   }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
