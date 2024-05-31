@@ -1,9 +1,11 @@
 <div class="form-container">
-  <form #loginForm="ngForm" (ngSubmit)="submit(loginForm)">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
     <mat-card>
       <mat-card-content>
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <mat-label>Cin</mat-label>
+          <!-- <mat-icon matPrefix>badge</mat-icon> -->
+          <mat-icon matPrefix>pin</mat-icon>
           <input
             matInput
             type="text"
@@ -18,17 +20,12 @@
           <mat-error *ngIf="cin.touched && cin.pristine">
             <!-- <mat-error *ngIf="cin.invalid && cin.touched"> -->
             Cin is required
-            </mat-error>
-          <mat-hint *ngIf="cin.invalid && cin.dirty">
-            <!-- <mat-hint *ngIf="cin.errors?.['minlength'] && cin.touched"> -->
-            Cin must contain at least
-            {{ cin.errors?.['minlength']?.requiredLength }}
-            characters
-          </mat-hint>
+          </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="fill">
           <mat-label>Password</mat-label>
+          <mat-icon matPrefix>password</mat-icon>
           <input
             matInput
             type="{{ hidePwd ? 'password' : 'text' }}"
@@ -38,25 +35,19 @@
             required
             minlength="1"
           />
-          <mat-icon 
-          matSuffix 
-          (click)="hidePwd = !hidePwd"
-          aria-label="Toggle password visibility"
-          [attr.aria-pressed]="!hidePwd">
-            {{ hidePwd ? "visibility_off" : "visibility" }}
-          </mat-icon
+          <mat-icon
+            matSuffix
+            (click)="hidePwd = !hidePwd"
+            aria-label="Toggle password visibility"
+            [attr.aria-pressed]="!hidePwd"
           >
+            {{ hidePwd ? "visibility_off" : "visibility" }}
+          </mat-icon>
           <!-- alert msgs -->
           <mat-error *ngIf="password.touched && password.pristine">
             <!-- <mat-error *ngIf="password.invalid && password.touched"> -->
             Password is required
-            </mat-error>
-          <mat-hint *ngIf="password.invalid && password.dirty">
-          <!-- <mat-hint *ngIf="password.errors?.['minlength'] && password.touched"> -->
-            Password must contain at least
-            {{ password.errors?.['minlength']?.requiredLength }}
-            characters
-            </mat-hint>
+          </mat-error>
         </mat-form-field>
 
         <button

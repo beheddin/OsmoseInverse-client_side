@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { OnInit, Injectable, inject, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Observable, map, catchError, throwError } from 'rxjs';
 import {
   HttpClientModule,
@@ -14,13 +15,20 @@ import { jwtDecode, JwtPayload } from 'jwt-decode';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnInit {
   private apiUrl: string = environment.USER_API_URL;
   // private tokenKey: string = 'token';
   private tokenKey: string = 'jwt';
   private http = inject(HttpClient);
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      const value = localStorage.getItem('jwt');
+      console.log(value);
+    }
+  }
 
   login(credentials: LoginRequest): Observable<LoginResponse> {
     return this.http
@@ -97,7 +105,7 @@ export class AuthService {
         lastName: decodedToken.lastName,
       };
       // console.log(decodedToken);
-      console.log(userDetails);
+      //console.log(userDetails);
 
       return userDetails;
     } catch (error) {

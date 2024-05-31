@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { JsonPipe } from '@angular/common';
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouterModule, Router } from '@angular/router';
 
@@ -16,31 +16,29 @@ import { Register } from '../../models/register';
     JsonPipe,
     HttpClientModule,
     RouterModule,
+    NgFor, NgIf
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
 export class RegisterComponent {
-  register: Register = new Register('', '', '', '', '', '', '');  //template-driven form
+  register: Register = new Register('', '', '', '', '', '', ''); //template-driven form
+  roles: string[] = ['User', 'Admin', 'SuperAdmin'];
+  passwordsMatch: boolean = false;
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  submit(registerForm: any) {
-    if (registerForm.invalid) return;
-
-    if (
-      !this.verifyPassword(
-        registerForm.value.password,
-        registerForm.value.confirmPassword
-      )
-    )
-      console.log("pwds don't match");
-
-    console.log(registerForm.value);
+  onSubmit(registerForm: any) {
+    if (registerForm.valid) 
+      console.log(this.register);
+    
+    //console.log(registerForm.value);
     //this.router.navigate(['login']);
   }
 
-  verifyPassword(password: string, confirmPassword: string): boolean {
-    return password === confirmPassword;
+  /*Use the ngModelChange event on the confirmPassword field in the template
+   to call this method which will check if the passwords match each time a character is entered in the confirmPassword field*/
+  validatePasswords(): void {
+    this.passwordsMatch = this.register.password === this.register.confirmPassword;
   }
 }

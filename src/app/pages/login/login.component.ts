@@ -45,7 +45,7 @@ export class LoginComponent {
     private router: Router
   ) {}
 
-  submit(loginForm: any): void {
+  onSubmit(loginForm: any): void {
     if (loginForm.valid) {
       this.authService
         .login(loginForm.value)

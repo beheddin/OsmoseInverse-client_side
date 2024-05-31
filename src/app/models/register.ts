@@ -5,10 +5,10 @@ export class Register extends Login {
     public firstName: string,
     public lastName: string,
     public email: string,
+    public role: string,
     public override cin: string,
     public override password: string,
     public confirmPassword: string,
-    public role: string
   ) {
     super(cin, password);
   }

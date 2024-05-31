@@ -1,12 +1,6 @@
-import {
-  Component,
-
-  OnInit,
-
-  inject,
-} from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MaterialModule } from '../../material.module';
-import { CommonModule, NgIf } from '@angular/common';
+import { NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { Router, RouterModule } from '@angular/router';
 // import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -24,7 +18,6 @@ import { AuthService } from '../../services/auth.service';
     MaterialModule,
     MatIconModule,
     NgIf,
-    CommonModule,
     // HttpClientModule,
     RouterModule,
   ],
