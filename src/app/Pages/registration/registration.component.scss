@@ -1,0 +1,27 @@
+form {
+  width: 400px; // form width
+}
+
+mat-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+}
+
+.registration-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.registration-icon {
+  font-size: 70px;
+  width: 100%;
+  height: auto;
+  color: lightgray;
+}
+
+.registration-icon-valid {
+  color: var(--mat-primary, #3f51b5); // fallback to primary color
+}

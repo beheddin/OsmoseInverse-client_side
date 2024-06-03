@@ -1,0 +1,43 @@
+// :host {
+//   display: flex;
+//   justify-content: center; /* Center horizontally */
+//   align-items: center; /* Center vertically */
+//   height: 100%; /* Ensure the form takes up the full height of its container */
+// }
+form {
+  width: 400px; // form width
+}
+
+mat-card {
+  width: 100%;
+  // height: 800px;
+  max-width: 500px;
+  padding: 10px;
+}
+
+.login-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  // flex-direction: row;
+  // flex-wrap: nowrap;
+  // justify-content: space-evenly;
+}
+
+// .login-text {
+//   font-size: 33px;
+//   font-weight: 430;
+//   color:gray
+// }
+
+.login-icon {
+  font-size: 70px;
+  width: 100%;
+  height: auto;
+  color: lightgray;
+}
+
+.login-icon-valid {
+  color: var(--mat-primary, #3f51b5); // fallback to primary color
+}

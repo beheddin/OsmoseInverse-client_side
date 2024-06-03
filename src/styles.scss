@@ -41,30 +41,44 @@ body {
   height: 100%;
 }
 body {
-  margin: 0;
+  margin: 0; //keep the topnav bar fixed to the top
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-//global style for forms
-form {
-  display: flex; /* Use flexbox for layout */
-  flex-direction: column; /* Align fields vertically */
-  width: 300px; /* Set a width for the form */
+.main-container {
+  display: flex;
+  flex-direction: column; // arrange items in a column
+  justify-content: center; // center items vertically
+  align-items: center; // center items horizontally
+  height: 100%; // take the full height of its container
 }
 
-mat-form-field {
-  width: 100%; /* Ensure fields take up full width of the form */
-  margin-bottom: 16px; /* Add some spacing between fields */
-}
-
-//login & register forms style
 .form-container {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100%; /* Ensure the form takes up the full height of its container */
+  flex-direction: column; // arrange items in a column
+  justify-content: center; // center items vertically
+  align-items: center; // center items horizontally
+  height: 100%; // take the full height of its container
+}
+
+// //forms global styles
+// form {
+//   display: flex; // Use flexbox for layout
+//   flex-direction: column; // align fields vertically
+//   // width: 400px; // form width
+// }
+
+mat-form-field {
+  width: 100%; // field takes up the full width of the form
+  //margin-bottom: 5px; // Add some spacing between fields
 }
 
 .fullwidth-btn {
   width: 100%;
+}
+
+mat-progress-bar {
+  width: 100%;
+  max-width: 500px; // Ensure the progress bar aligns with the form
+  margin-top: 15px; // Add some space above the progress bar
 }

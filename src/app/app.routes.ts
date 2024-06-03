@@ -1,16 +1,20 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
-import { MainComponent } from './components/main/main.component';
-import { ProfileComponent } from './pages/profile/profile.component';
-import { SettingsComponent } from './pages/settings/settings.component';
+import { LoginComponent } from './Pages/login/login.component';
+import { RegistrationComponent } from './Pages/registration/registration.component';
+import { ProfileComponent } from './Pages/profile/profile.component';
+import { DashboardComponent } from './Pages/dashboard/dashboard.component';
+import { FilialesComponent } from './Pages/filiale/filiales/filiales.component';
+import { AteliersComponent } from './Pages/atelier/ateliers/ateliers.component';
+import { StationsComponent } from './Pages/station/stations/stations.component';
 
 export const routes: Routes = [
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: '', component: MainComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'register', component: RegisterComponent },
-  // { path: 'settings', component: SettingsComponent },
-  // { path: '**', component: HomeComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'filiales', component: FilialesComponent },
+  { path: 'ateliers', component: AteliersComponent },
+  { path: 'stations', component: StationsComponent },
+  { path: '**', component: DashboardComponent },
 ];
