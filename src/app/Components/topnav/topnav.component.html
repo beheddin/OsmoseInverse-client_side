@@ -1,0 +1,83 @@
+<mat-toolbar>
+  <!-- <button
+    mat-icon-button
+    class="left-btn"
+    routerLinkActive="active"
+    routerLink=""
+    (click)="handleMenuBtnClick()"
+  > -->
+  <button mat-icon-button class="left-btn" [matMenuTriggerFor]="menu" (click)="handleMenuBtnClick()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item *ngFor="let item of menuBtnItems" (click)="onMenuItemClick(item)">{{ item }}</button>
+  </mat-menu>
+
+  <span class="spacer"></span>
+  <!-- <h6 *ngIf="userIsAuthenticated">{{ message }}</h6> -->
+  <!-- <h6> -->
+  <!-- {{ message }} -->
+  <!-- </h6> -->
+  <!-- <span class="spacer"></span> -->
+
+  <div *ngIf="authService.isLoggedIn(); else loginTemplate">
+    <!-- <div *ngIf="isLoggedIn()"> -->
+    <!-- <div *ngIf="userIsAuthenticated"> -->
+    <div *ngIf="authService.getUserDetails() as userDetails">
+      <!-- <div>{{ userDetails?.fullName }}</div> -->
+      <!-- </div> -->
+
+      <button
+        mat-button
+        [matMenuTriggerFor]="profileMenu"
+        color="primary"
+        class="right-btn"
+      >
+        <span>
+          {{ userDetails?.firstName }} {{ userDetails?.lastName[0] }}.</span
+        >
+        <mat-icon>account_circle</mat-icon>
+      </button>
+    </div>
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLinkActive="active" routerLink="/profile">
+        <!-- <button mat-menu-item [routerLink]="['profile', 1]"> -->
+        <mat-icon>person</mat-icon>
+        <span> My Profile </span>
+      </button>
+      <!-- <button mat-menu-item routerLinkActive="active" routerLink="/settings">
+      <mat-icon>settings</mat-icon>
+      Settings
+    </button> -->
+
+      <button mat-menu-item routerLinkActive="active" routerLink="/registration">
+        <mat-icon>app_registration</mat-icon>
+        <span> Registration </span>
+      </button>
+      <button
+        mat-menu-item
+        routerLinkActive="active"
+        routerLink="/login"
+        (click)="logout()"
+      >
+        <mat-icon>logout</mat-icon>
+        <span>Log out</span>
+      </button>
+    </mat-menu>
+    <!-- </div> -->
+  </div>
+
+  <!-- <div *ngIf="!userIsAuthenticated"> -->
+  <!-- <div *ngIf="!isLoggedIn()"> -->
+  <ng-template #loginTemplate>
+    <!-- <button
+      mat-raised-button
+      class="right-btn"
+      routerLinkActive="active"
+      routerLink="/login"
+    >
+      <mat-icon>login</mat-icon>
+      <span>Login</span>
+    </button> -->
+  </ng-template>
+</mat-toolbar>
