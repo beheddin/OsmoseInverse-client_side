@@ -1,27 +1,75 @@
-# ClientSide
+# Screenshots
+## Login
+![login1](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/3e67b62e-7f9b-462c-8497-4bc3849cef6e)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+![login2](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/37ae18fe-3a81-48cc-b057-66cc073e5788)
 
-## Development server
+## Navbar
+![topnav1](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/9add8d70-3b5e-4ba0-a2db-b81bdd30d2d0)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Sidebar
+![topnav2](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/2e62ff04-d784-43ca-a88a-d68c8d5e927e)
 
-## Code scaffolding
+## Gestion Users
+![manage-users](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/a4c1966e-4087-4118-a39d-ac158270c983)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Registration
+![register1](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/f6101d02-957b-4495-bc74-8381dca45b6b)
 
-## Build
+![register2](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/e273af71-86c1-40b6-a425-17d787a988cd)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Gestion Filiales
+![manage-filiales](https://github.com/beheddin/OsmoseInverse-client_side/assets/72648203/d03f6444-ff1b-47c9-bd1c-2d70752485c7)
 
-## Running unit tests
+## Test data
+User:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+{
+  "firstName": "Nusrat",
+  "lastName": "Khan",
+  "email": "user1@mail.com",
+  "cin": "123",
+  "password": "123",
+  "roleLabel": "SuperAdmin",
+  "filialeLabel": "filiale 2"
+}
 
-## Running end-to-end tests
+{
+    "firstName": "Hakan",
+    "lastName": "Fidan",
+    "email": "user2@mail.com",
+    "cin": "456",
+    "password": "456",
+    "roleLabel": "Admin",
+    "filialeLabel": "filiale 1"
+}
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+{
+  "firstName": "Li",
+  "lastName": "Wang",
+  "email": "user3@mail.com",
+  "cin": "789",
+  "password": "789",
+  "roleLabel": "Admin",
+  "filialeLabel": "filiale 2"
+}
 
-## Further help
+{
+  "firstName": "Milan",
+  "lastName": "Hodak",
+  "email": "user4@mail.com",
+  "cin": "159",
+  "password": "159",
+  "roleLabel": "User",
+  "filialeLabel": "filiale 2"
+}
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+{
+  "firstName": "Lorenza",
+  "lastName": "Pinto",
+  "email": "user5@mail.com",
+  "cin": "357",
+  "password": "357",
+  "roleLabel": "User",
+  "filialeLabel": "filiale 1"
+}
