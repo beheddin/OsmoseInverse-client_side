@@ -1,0 +1,47 @@
+<h1 class="title">Gestion des Filiales</h1>
+<div class="toolbox">
+  <button mat-raised-button class="toolbox-btn create">
+    Create
+    <mat-icon iconPositionEnd>add</mat-icon>
+  </button>
+  <button mat-raised-button class="toolbox-btn update">
+    Update
+    <mat-icon iconPositionEnd>edit</mat-icon>
+  </button>
+  <button mat-raised-button class="toolbox-btn delete">
+    Delete
+    <mat-icon iconPositionEnd>delete</mat-icon>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z3">
+  <!-- <table mat-table [dataSource]="dataSource"> -->
+  <!-- filialeId Column -->
+  <!-- <ng-container matColumnDef="filialeId">
+    <th mat-header-cell *matHeaderCellDef>Filiale ID</th>
+    <td mat-cell *matCellDef="let filiale">{{ filiale.filialeId }}</td>
+  </ng-container> -->
+
+  <!-- filialeLabel Column -->
+  <ng-container matColumnDef="filialeLabel">
+    <th mat-header-cell *matHeaderCellDef class="header-cell">Filiale Label</th>
+    <td mat-cell *matCellDef="let filiale" (click)="toggleSelection(filiale)">
+      <!-- <mat-card (click)="toggleSelection(filiale)" class="card">
+        <mat-card-content> -->
+      <div class="table-row">
+        <mat-checkbox
+          class="checkbox"
+          [checked]="isCardSelected(filiale)"
+          *ngIf="isSelected(filiale)"
+        ></mat-checkbox>
+        {{ filiale.filialeLabel }}
+        <!-- </mat-card-content>
+      </mat-card> -->
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<!-- </div> -->

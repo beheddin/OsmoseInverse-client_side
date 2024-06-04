@@ -1,20 +1,24 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './Pages/login/login.component';
-import { RegistrationComponent } from './Pages/registration/registration.component';
-import { ProfileComponent } from './Pages/profile/profile.component';
 import { DashboardComponent } from './Pages/dashboard/dashboard.component';
-import { FilialesComponent } from './Pages/filiale/filiales/filiales.component';
-import { AteliersComponent } from './Pages/atelier/ateliers/ateliers.component';
-import { StationsComponent } from './Pages/station/stations/stations.component';
+import { UserProfileComponent } from './Pages/user-profile/user-profile.component';
+import { ManageUsersComponent } from './Pages/manage-users/manage-users.component';
+import { RegistrationComponent } from './Pages/registration/registration.component';
+import { ManageRolesComponent } from './Pages/manage-roles/manage-roles.component';
+import { ManageFilialesComponent } from './Pages/manage-filiales/manage-filiales.component';
+import { ManageAteliersComponent } from './Pages/manage-ateliers/manage-ateliers.component';
+import { ManageStationsComponent } from './Pages/manage-stations/manage-stations.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, //default route
   { path: 'dashboard', component: DashboardComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: UserProfileComponent },
+  { path: 'users', component: ManageUsersComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'filiales', component: FilialesComponent },
-  { path: 'ateliers', component: AteliersComponent },
-  { path: 'stations', component: StationsComponent },
+  { path: 'roles', component: ManageRolesComponent },
+  { path: 'filiales', component: ManageFilialesComponent },
+  { path: 'ateliers', component: ManageAteliersComponent },
+  { path: 'stations', component: ManageStationsComponent },
   { path: '**', component: DashboardComponent },
 ];

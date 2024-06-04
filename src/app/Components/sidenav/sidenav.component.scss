@@ -1,0 +1,25 @@
+.main-container {
+  height: 100%; // take the full height of the page
+}
+
+.items-container {
+  display: flex;
+  flex-direction: column;
+  //justify-content: space-around;
+  align-items: center;
+  //height: 100%;
+  padding: 15px;
+}
+
+.sidenav-item {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}

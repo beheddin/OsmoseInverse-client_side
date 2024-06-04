@@ -14,6 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatSnackBarModule,
     MatTableModule,
     MatProgressBarModule,
+    MatCheckboxModule,
   ],
   exports: [
     MatButtonModule,
@@ -47,6 +49,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatSnackBarModule,
     MatTableModule,
     MatProgressBarModule,
+    MatCheckboxModule,
   ],
 })
 export class MaterialModule {}

@@ -45,20 +45,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-.main-container {
-  display: flex;
-  flex-direction: column; // arrange items in a column
-  justify-content: center; // center items vertically
-  align-items: center; // center items horizontally
-  height: 100%; // take the full height of its container
-}
-
 .form-container {
   display: flex;
-  flex-direction: column; // arrange items in a column
   justify-content: center; // center items vertically
   align-items: center; // center items horizontally
-  height: 100%; // take the full height of its container
+  height: 100vh; // take the full height of the page
 }
 
 // //forms global styles

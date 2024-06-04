@@ -1,0 +1,24 @@
+<mat-sidenav-container class="main-container">
+  <!-- mat-sidenav modes="over/push/side -->
+  <!-- <mat-sidenav mode="side" [(opened)]="isSidenavOpened"> -->
+  <mat-sidenav mode="side" [opened]="isSidenavOpened">
+    <div class="items-container">
+      <button
+        mat-button
+        class="sidenav-item"
+        *ngFor="let item of menuBtnItems"
+        routerLinkActive="active"
+        [routerLink]="item.toLowerCase()"
+        (click)="toggleSidenav()"
+      >
+        Gestion {{ item }}
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <main class="content-container"> -->
+    <main>
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

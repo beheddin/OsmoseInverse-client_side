@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 
 import { Emitter } from '../../emitter';
 import { AuthService } from '../../Services/auth.service';
+import { SidenavService } from '../../Services/sidenav.service';
 
 @Component({
   selector: 'app-topnav',
@@ -37,10 +38,11 @@ export class TopnavComponent implements OnInit {
   menuBtnItems: string[] = ['Filiales', 'Ateliers', 'Stations'];
 
   authService = inject(AuthService);
-  router = inject(Router);
-  matSnackBar = inject(MatSnackBar);
+  private router = inject(Router);
+  private matSnackBar = inject(MatSnackBar);
+  // private sidenavService = inject(SidenavService);
 
-  constructor() {} //private accountService: AccountService //inject the service // private httpClient: HttpClient
+  constructor(private sidenavService: SidenavService) {} //private accountService: AccountService //inject the service // private httpClient: HttpClient
 
   ngOnInit(): void {
     //this.loginStatus = this.accountService.loginStatus;
@@ -131,6 +133,10 @@ export class TopnavComponent implements OnInit {
   //   return this.authService.isLoggedIn();
   // }
 
+  toggleSidenav() {
+    this.sidenavService.toggleSidenav();
+  }
+
   logout = () => {
     this.authService.logout();
     this.matSnackBar.open('User successfully logged out', 'Close', {
@@ -169,11 +175,11 @@ export class TopnavComponent implements OnInit {
   //     });
   // }
 
-  handleMenuBtnClick(): void {
-    //console.log('menu btn clicked');
-    // this.menuBtnIsClicked = !this.menuBtnIsClicked;
-    // Emitter.sidenavIsOpenEmitter.emit(this.menuBtnIsClicked);
-  }
+  // handleMenuBtnClick(): void {
+  //   //console.log('menu btn clicked');
+  //   // this.menuBtnIsClicked = !this.menuBtnIsClicked;
+  //   // Emitter.sidenavIsOpenEmitter.emit(this.menuBtnIsClicked);
+  // }
 
   onMenuItemClick(item: string) {
     //console.log(`${item} menu item clicked`);
