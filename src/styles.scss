@@ -47,6 +47,7 @@ body {
 
 .form-container {
   display: flex;
+  flex-direction: column;
   justify-content: center; // center items vertically
   align-items: center; // center items horizontally
   height: 100vh; // take the full height of the page
@@ -70,6 +71,6 @@ mat-form-field {
 
 mat-progress-bar {
   width: 100%;
-  max-width: 500px; // Ensure the progress bar aligns with the form
+  max-width: 400px; // Ensure the progress bar aligns with the form
   margin-top: 15px; // Add some space above the progress bar
 }
