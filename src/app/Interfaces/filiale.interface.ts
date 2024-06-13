@@ -1,4 +1,5 @@
 export interface FilialeInterface {
-   filialeId: string;
-   filialeLabel: string;
+   idFiliale: string;
+   nomFiliale: string;
+   abbreviationFiliale: string;
 }

@@ -1,4 +1,4 @@
 export interface RoleInterface {
-    roleId: string;
-    roleLabel: string;
+    idRole: string;
+    nomRole: string;
 }

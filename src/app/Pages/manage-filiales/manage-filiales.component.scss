@@ -1,13 +1,16 @@
-.title {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
+// .title {
+//   text-align: center;
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+// }
 
-.custom-table {
-  //width: 100%;
-  //display: flex;
-  //flex-direction: column;
+.container {
+  display: flex;
+  flex-direction: row;
+  // justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
 }
 
 mat-header-row,
@@ -16,66 +19,60 @@ mat-row {
   width: 100%;
 }
 
-.header-cell {
-  //flex: 1;
+th {
   border-right: 1px solid #e0e0e0;
-
   text-align: center;
-  font-weight: 550;
 }
 
+td {
+  text-align: center;
+}
+
+//ACTIONS BTNS
 .btns-container {
   display: flex;
   flex-direction: row;
-  // flex-wrap: nowrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
-  // justify-content: center;
   align-items: center;
   gap: 10px; // adds space between the buttons
-  // margin-bottom: 30px;
 }
 
-.btn {
+.icon-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  // padding: 10px;
-  // border: none;
-  // border-radius: 4px;
+}
+
+button {
+
+  // width: 50px; /* Set the width to a fixed value */
+  // height: 50px; /* Set the height to the same fixed value */
+  // min-width: 48px; /* Ensure the button does not shrink */
+  // min-height: 48px; /* Ensure the button does not shrink */
   cursor: pointer;
-  color: white;
+
   transition: background-color 0.3s;
 
-  &.info {
-    background-color: #2196f3; // Blue color
+  &.add {
+    background-color: #2196f3;
   }
 
-  &.create {
-    background-color: #4caf50; // Green color
-  }
-
-  &.update {
-    background-color: #ff9800; // Orange color
+  &.edit {
+    // background-color: #ff9800; // Orange
+    background-color: #4caf50;
   }
 
   &.delete {
-    background-color: #f44336; // Red color
+    background-color: #f44336;
   }
 
   &:hover {
     filter: brightness(0.9); // Darken the button on hover
   }
 
-  .mat-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    // width: 100%;
-    // height: 100%;
+  mat-icon {
+    font-size: 20px;
+    color: white;
   }
 }
-
-// .card {
-//     margin: 10px;
-//     width: 300px;
-//   }

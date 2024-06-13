@@ -2,18 +2,29 @@
   height: 100%; // take the full height of the page
 }
 
-.items-container {
+.menu-items-container {
   display: flex;
   flex-direction: column;
-  //justify-content: space-around;
-  align-items: center;
+  //align-items: center;
   //height: 100%;
-  padding: 15px;
+  padding: 10px;
 }
 
-.sidenav-item {
+button {
   width: 100%;
-  margin-bottom: 20px;
+  &:hover {
+    background-color: whitesmoke;
+  }
+
+  &.active {
+    color: white;
+    background-color: dodgerblue;
+    //  background-color: rgb(38, 198, 218);
+  }
+}
+
+mat-panel-title {
+  font-weight: bold;
 }
 
 .content-container {

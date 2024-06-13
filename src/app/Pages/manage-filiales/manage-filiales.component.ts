@@ -15,7 +15,7 @@ import { MaterialModule } from '../../material.module';
 })
 export class ManageFilialesComponent implements OnInit {
   // displayedColumns: string[] = ['filialeId', 'filialeLabel'];
-  displayedColumns: string[] = ['filialeLabel', 'actions'];
+  displayedColumns: string[] = ['nomFiliale', 'abbreviationNomFiliale', 'actions'];
   dataSource: MatTableDataSource<FilialeInterface> =
     new MatTableDataSource<FilialeInterface>();
   selectedFiliale: any = null;
@@ -49,12 +49,8 @@ export class ManageFilialesComponent implements OnInit {
     return this.selectedFiliale === filiale;
   }
 
-  infoAction(filiale: any): void {
-    console.log(filiale);
-  }
-
-  createAction(filiale: any): void {
-    console.log(filiale);
+  createAction(): void {
+    console.log("created");
   }
 
   updateAction(filiale: any): void {

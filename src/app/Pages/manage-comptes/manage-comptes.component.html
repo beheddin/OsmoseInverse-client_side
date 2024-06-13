@@ -1,0 +1,67 @@
+<!-- <div class="main-container"> -->
+<h1 class="title">Gestion des Utilisateurs</h1>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z3">
+  <!-- <table mat-table [dataSource]="dataSource"> -->
+  <!-- nom col -->
+  <ng-container matColumnDef="nom">
+    <th mat-header-cell *matHeaderCellDef class="header-cell">Nom</th>
+    <td mat-cell *matCellDef="let compte">
+      <div class="table-row">
+        {{ compte.nom }}
+      </div>
+    </td>
+  </ng-container>
+  <!-- nomRole col -->
+  <ng-container matColumnDef="nomRole">
+    <th mat-header-cell *matHeaderCellDef class="header-cell">Role</th>
+    <td mat-cell *matCellDef="let compte">
+      <div class="table-row">
+        {{ compte.nomRole }}
+      </div>
+    </td>
+  </ng-container>
+  <!-- nomFiliale col -->
+  <ng-container matColumnDef="nomFiliale">
+    <th mat-header-cell *matHeaderCellDef class="header-cell">Filiale</th>
+    <td mat-cell *matCellDef="let compte">
+      <div class="table-row">
+        {{ compte.nomFiliale }}
+      </div>
+    </td>
+  </ng-container>
+  <!-- btns col-->
+  <ng-container matColumnDef="actions">
+    <!-- <th mat-header-cell *matHeaderCellDef class="header-cell">Actions</th> -->
+    <th mat-header-cell *matHeaderCellDef class="header-cell"></th>
+    <td mat-cell *matCellDef="let filiale">
+      <div class="actions-btns-container">
+        <button
+          mat-raised-button
+          class="btn create"
+          (click)="createAction(filiale)"
+        >
+          <mat-icon>add</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          class="btn update"
+          (click)="updateAction(filiale)"
+        >
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button
+          mat-raised-button
+          class="btn delete"
+          (click)="deleteAction(filiale)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<!-- </div> -->

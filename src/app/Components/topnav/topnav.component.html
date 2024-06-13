@@ -9,8 +9,7 @@
   <!-- <button mat-icon-button class="left-btn" 
   [matMenuTriggerFor]="menu" 
   (click)="toggleSidenav()"> -->
-  <button mat-icon-button class="left-btn" 
-  (click)="toggleSidenav()">
+  <button mat-icon-button class="left-btn" (click)="toggleSidenav()">
     <mat-icon>menu</mat-icon>
   </button>
   <!-- <mat-menu #menu="matMenu">
@@ -31,16 +30,29 @@
       <!-- <div>{{ userDetails?.fullName }}</div> -->
       <!-- </div> -->
 
-      <button
+      <!-- <button
         mat-button
         [matMenuTriggerFor]="profileMenu"
         color="primary"
         class="right-btn"
       >
-        <span>
+        <span >
           {{ userDetails?.firstName }} {{ userDetails?.lastName[0] }}.</span
         >
         <mat-icon iconPositionEnd>account_circle</mat-icon>
+      </button> -->
+
+      <!-- <button
+        [matMenuTriggerFor]="profileMenu"
+        mat-icon-button
+        class="m-r-5 p-0 d-flex jc-c align-items-center"
+      > -->
+      <button
+        mat-icon-button
+        [matMenuTriggerFor]="profileMenu"
+        class="right-btn"
+      >
+        <img src="assets/profile_pictures/8.jpg" alt="user" class="profile-pic" />
       </button>
     </div>
     <mat-menu #profileMenu="matMenu">

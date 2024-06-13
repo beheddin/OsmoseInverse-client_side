@@ -32,7 +32,7 @@ import { FilialeService } from '../../Services/filiale.service';
   styleUrl: './registration.component.scss',
 })
 export class RegistrationComponent implements OnInit {
-  registration: Registration = new Registration('', '', '', '', '', '', '', ''); //template-driven form
+  registration: Registration = new Registration('', '', '', '', '', ''); //template-driven form
   // roles: string[] = ['User', 'Admin', 'SuperAdmin'];
   passwordsMatch: boolean = false;
   hidePwd: boolean = true;

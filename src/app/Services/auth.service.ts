@@ -10,14 +10,15 @@ import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 import { environment } from '../../environments/environment';
 import { LoginInterface } from '../Interfaces/login.interface';
-import { AuthResponseInterface } from '../Interfaces/auth-response.interface';
-import { UserInterface } from '../Interfaces/user.interface';
+import { LoginResponseInterface } from '../Interfaces/login-response.interface';
+import { MessageResponseInterface } from '../Interfaces/message-response.interface';
+import { CompteInterface } from '../Interfaces/compte.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit {
-  private apiUrl: string = environment.USER_API_URL;
+  private apiUrl: string = environment.COMPTE_API_URL;
   // private tokenKey: string = 'token';
   private tokenKey: string = 'jwt';
   private http = inject(HttpClient);
@@ -31,11 +32,11 @@ export class AuthService implements OnInit {
     // }
   }
 
-  login(credentials: LoginInterface): Observable<AuthResponseInterface> {
+  login(credentials: LoginInterface): Observable<LoginResponseInterface> {
     return this.http
-      .post<AuthResponseInterface>(`${this.apiUrl}/login`, credentials)
+      .post<LoginResponseInterface>(`${this.apiUrl}/login`, credentials)
       .pipe(
-        map((response: AuthResponseInterface) => {
+        map((response: LoginResponseInterface) => {
           if (response.isSuccessful)
             localStorage.setItem(this.tokenKey, response.token);
           return response;
@@ -45,13 +46,13 @@ export class AuthService implements OnInit {
       );
   }
 
-  // registration(user: UserInterface): Observable<string> {
-  registration(user: UserInterface): Observable<AuthResponseInterface> {
+  // registration(user: CompteInterface): Observable<string> {
+  registration(user: CompteInterface): Observable<MessageResponseInterface> {
     // return this.http.post<string>(`${this.apiUrl}/post`, user);
     return this.http
-      .post<AuthResponseInterface>(`${this.apiUrl}/post`, user)
+      .post<MessageResponseInterface>(`${this.apiUrl}/post`, user)
       .pipe(
-        map((response: AuthResponseInterface) => {
+        map((response: MessageResponseInterface) => {
           return response;
           //catchError(this.handleError)
         })
@@ -114,8 +115,7 @@ export class AuthService implements OnInit {
       const decodedToken: any = jwtDecode(token);
       const userDetails = {
         id: decodedToken.sub,
-        firstName: decodedToken.firstName,
-        lastName: decodedToken.lastName,
+        nom: decodedToken.nom,
       };
       // console.log(decodedToken);
       //console.log(userDetails);

@@ -1,52 +1,49 @@
-<h1 class="title">Gestion des Filiales</h1>
-<table
-  mat-table
-  [dataSource]="dataSource"
-  class="mat-elevation-z3 custom-table"
-  matSort
->
-  <!-- filialeLabel Column -->
-  <ng-container matColumnDef="filialeLabel">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell">Filiale Label</th>
+<div class="container">
+  <div></div>
+  <h2 class="title">Paramétrage des Filiales</h2>
+  <button mat-raised-button class="add" (click)="createAction()">
+    <div class="icon-container">
+      <mat-icon>add</mat-icon>
+    </div>
+  </button>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z3" matSort>
+  <!-- nomFiliale Column -->
+  <ng-container matColumnDef="nomFiliale">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Filiale</th>
     <td mat-cell *matCellDef="let filiale" (click)="toggleSelection(filiale)">
-      {{ filiale.filialeLabel }}
+      {{ filiale.nomFiliale }}
+    </td>
+  </ng-container>
+  <!-- abbreviationNomFiliale Column -->
+  <ng-container matColumnDef="abbreviationNomFiliale">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Abbr. Filiale</th>
+    <td mat-cell *matCellDef="let filiale" (click)="toggleSelection(filiale)">
+      {{ filiale.abbreviationNomFiliale }}
     </td>
   </ng-container>
 
-  <!-- buttons -->
+  <!-- btns col-->
   <ng-container matColumnDef="actions">
-    <!-- <th mat-header-cell *matHeaderCellDef class="header-cell">Actions</th> -->
-    <th mat-header-cell *matHeaderCellDef class="header-cell"></th>
+    <!-- <th mat-header-cell *matHeaderCellDef>Actions</th> -->
+    <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let filiale">
       <div class="btns-container">
-        <button
-          mat-raised-button
-          class="btn info"
-          (click)="infoAction(filiale)"
-        >
-          <mat-icon>info</mat-icon>
+        <button mat-raised-button class="edit" (click)="updateAction(filiale)">
+          <div class="icon-container">
+            <mat-icon>edit</mat-icon>
+          </div>
         </button>
         <button
-          mat-raised-button
-          class="btn create"
-          (click)="createAction(filiale)"
+        mat-raised-button
+        class="delete"
+        (click)="deleteAction(filiale)"
         >
-          <mat-icon>add</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          class="btn update"
-          (click)="updateAction(filiale)"
-        >
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button
-          mat-raised-button
-          class="btn delete"
-          (click)="deleteAction(filiale)"
-        >
-          <mat-icon>delete</mat-icon>
-        </button>
+          <div class="icon-container">
+            <mat-icon>delete</mat-icon>
+          </div>
+          </button>
       </div>
     </td>
   </ng-container>

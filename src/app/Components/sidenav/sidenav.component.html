@@ -1,18 +1,40 @@
 <mat-sidenav-container class="main-container">
   <!-- mat-sidenav modes="over/push/side -->
-  <!-- <mat-sidenav mode="side" [(opened)]="isSidenavOpened"> -->
-  <mat-sidenav mode="side" [opened]="isSidenavOpened">
-    <div class="items-container">
-      <button
-        mat-button
-        class="sidenav-item"
-        *ngFor="let item of menuBtnItems"
-        routerLinkActive="active"
-        [routerLink]="item.toLowerCase()"
-        (click)="toggleSidenav()"
-      >
-        Gestion {{ item }}
-      </button>
+  <!-- <mat-sidenav mode="side" [(opened)]="isOpenSidenav"> -->
+  <mat-sidenav mode="side" [opened]="isOpenSidenav">
+    <div class="menu-items-container" *ngFor="let item of menuBtnItems">
+      <div *ngIf="!item.subItems; else expansionPanel">
+        <button
+          mat-raised-button
+
+          routerLinkActive="active"
+          [routerLink]="[item.route]"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <!-- {{ item !== 'Dashboard' ? 'Gestion ' + item : item }} -->
+          {{ item.label }}
+        </button>
+      </div>
+      <ng-template #expansionPanel>
+          <mat-expansion-panel
+            (opened)="isOpenPanel = true"
+            (closed)="isOpenPanel = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ item.label }}</mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let subItem of item.subItems">
+              <button
+                mat-button
+                routerLinkActive="active"
+                [routerLink]="[subItem.route]"
+                [routerLinkActiveOptions]="{ exact: true }"
+              >
+                Paramétrage des {{ subItem.label }}
+              </button>
+            </div>
+          </mat-expansion-panel>
+      </ng-template>
     </div>
   </mat-sidenav>
   <mat-sidenav-content>

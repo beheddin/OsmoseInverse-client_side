@@ -1,11 +1,11 @@
 export const environment = {
   production: false,
-  USER_API_URL: 'http://localhost:5000/User',
-  //USER_API_URL: 'https://localhost:5001/User',
+  COMPTE_API_URL: 'http://localhost:5000/Comptes',
+  //COMPTE_API_URL: 'https://localhost:5001/Comptes',
 
-  ROLE_API_URL: 'http://localhost:5000/Role',
-  // ROLE_API_URL: 'https://localhost:5001/Role',
+  ROLE_API_URL: 'http://localhost:5000/Roles',
+  // ROLE_API_URL: 'https://localhost:5001/Roles',
 
-  FILIALE_API_URL: 'http://localhost:5000/Filiale',
-  // FILIALE_API_URL: 'https://localhost:5000/Filiale',
+  FILIALE_API_URL: 'http://localhost:5000/Filiales',
+  // FILIALE_API_URL: 'https://localhost:5000/Filiales',
 };

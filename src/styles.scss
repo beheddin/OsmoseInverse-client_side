@@ -65,12 +65,65 @@ mat-form-field {
   //margin-bottom: 5px; // Add some spacing between fields
 }
 
-.fullwidth-btn {
-  width: 100%;
-}
+// .fullwidth-btn {
+//   width: 100%;
+// }
 
 mat-progress-bar {
   width: 100%;
   max-width: 400px; // Ensure the progress bar aligns with the form
   margin-top: 15px; // Add some space above the progress bar
 }
+
+//MANAGEMENT MODULE
+// //ACTIONS BTNS
+// .actions-btns-container {
+//   display: flex;
+//   flex-direction: row;
+//   // flex-wrap: nowrap;
+//   justify-content: flex-end;
+//   // justify-content: center;
+//   align-items: center;
+//   gap: 10px; // adds space between the buttons
+//   // margin-bottom: 30px;
+
+//   &.btn {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     // padding: 10px;
+//     // border: none;
+//     // border-radius: 4px;
+//     cursor: pointer;
+//     color: white;
+//     transition: background-color 0.3s;
+
+//     &.info {
+//       background-color: #2196f3; // Blue color
+//     }
+
+//     &.create {
+//       background-color: #4caf50; // Green color
+//     }
+
+//     &.update {
+//       background-color: #ff9800; // Orange color
+//     }
+
+//     &.delete {
+//       background-color: #f44336; // Red color
+//     }
+
+//     &:hover {
+//       filter: brightness(0.9); // Darken the button on hover
+//     }
+
+//     .mat-icon {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       // width: 100%;
+//       // height: 100%;
+//     }
+//   }
+// }

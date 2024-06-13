@@ -40,5 +40,17 @@ mat-card {
 }
 
 .login-icon-valid {
-  color: var(--mat-primary, #3f51b5); // fallback to primary color
+  //color: var(--mat-primary, #3f51b5); // fallback to primary color
+  color: dodgerblue;
+}
+
+// Default styles for the button
+.fullwidth-btn {
+  width: 100%;
+}
+
+//Styles for the enabled button
+.fullwidth-btn:not([disabled]) {
+  background-color: dodgerblue;
+  color: white;
 }

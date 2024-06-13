@@ -1,11 +1,27 @@
+mat-toolbar {
+  background-color: dodgerblue;
+  color: white;
+}
+
 .spacer {
   flex: 1 1 auto;
 }
 
-.right-btn {
-  margin: 10px 0px 10px 20px;
-}
-
 .left-btn {
   margin: 10px 0px 10px 0px;
+}
+
+.right-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  overflow: hidden; // Ensure the profile-pic does not overflow over the button limits
+}
+
+.profile-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; // Ensure the image is round
 }

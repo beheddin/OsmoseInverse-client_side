@@ -1,20 +1,13 @@
-import { UserInterface } from '../Interfaces/user.interface';
+import { CompteInterface } from '../Interfaces/compte.interface';
 // import { Login } from './Login';
 
-export class Registration implements UserInterface {
+export class Registration implements CompteInterface {
   constructor(
-    // public userId: string,
-    public firstName: string,
-    public lastName: string,
-    public email: string,
+    public nom: string,
     public cin: string,
-    // public override cin: string,
-    // public override password: string,
     public password: string,
     public confirmPassword: string,
-    public roleLabel: string,
-    public filialeLabel: string
-  ) {
-    //super(cin, password);
-  }
+    public nomRole: string,
+    public nomFiliale: string
+  ) {}
 }
