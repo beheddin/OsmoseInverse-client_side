@@ -1,0 +1,420 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Objectif
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/objectifs">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="objectifForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Objectif</mat-label>
+        <input matInput type="text" formControlName="labelObjectif" required />
+        <mat-error
+          *ngIf="
+                                      objectifForm.get('labelObjectif')?.errors?.['required'] &&
+                                      objectifForm.get('labelObjectif')?.touched
+                                    "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                                      objectifForm.get('labelObjectif')?.errors?.['minlength'] &&
+                                      objectifForm.get('labelObjectif')?.dirty
+                                    "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                                      objectifForm.get("labelObjectif")?.errors?.['minlength']
+                                        ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="fill">
+        <mat-label>Année</mat-label>
+        <input matInput type="text" formControlName="annee" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('annee')?.errors?.['required'] &&
+                    objectifForm.get('annee')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('annee')?.hasError('min') &&
+            objectifForm.get('annee')?.touched
+          "
+        >
+          L'Année doit être positif
+        </mat-error>
+      </mat-form-field> -->
+      <mat-form-field>
+        <mat-label>Year</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="annee"
+          required
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker
+          #picker
+          startView="multi-year"
+          panelClass="year-picker"
+          (yearSelected)="chosenYearHandler($event, picker)"
+          (monthSelected)="$event.stopPropagation()"
+        ></mat-datepicker>
+        <mat-error
+          *ngIf="objectifForm.get('annee')?.errors?.['required'] && objectifForm.get('annee')?.touched"
+        >
+          This field is compulsory
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>TDS Eau Brute</mat-label>
+        <input matInput type="number" formControlName="tdSeauBrute" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('tdSeauBrute')?.errors?.['required'] &&
+                    objectifForm.get('tdSeauBrute')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('tdSeauBrute')?.hasError('min') &&
+            objectifForm.get('tdSeauBrute')?.touched
+          "
+        >
+          TDS Eau Brute doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>TDS Eau Osmosée</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="tdSeauOsmosee"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('tdSeauOsmosee')?.errors?.['required'] &&
+                    objectifForm.get('tdSeauOsmosee')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('tdSeauOsmosee')?.hasError('min') &&
+            objectifForm.get('tdSeauOsmosee')?.touched
+          "
+        >
+          TDS Eau Osmosée doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Rendement Membranes</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="rendementMembranes"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('rendementMembranes')?.errors?.['required'] &&
+                    objectifForm.get('rendementMembranes')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('rendementMembranes')?.hasError('min') &&
+            objectifForm.get('rendementMembranes')?.touched
+          "
+        >
+          Le Rendement des Membranes doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Rendement</mat-label>
+        <input matInput type="number" formControlName="rendement" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('rendement')?.errors?.['required'] &&
+                    objectifForm.get('rendement')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('rendement')?.hasError('min') &&
+            objectifForm.get('rendement')?.touched
+          "
+        >
+          Le Rendement doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Permanent Flow</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="permanentFlow"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('permanentFlow')?.errors?.['required'] &&
+                    objectifForm.get('permanentFlow')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('permanentFlow')?.hasError('min') &&
+            objectifForm.get('permanentFlow')?.touched
+          "
+        >
+          Permanent Flow doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Taux d'Exploitation</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="tauxExploitation"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('tauxExploitation')?.errors?.['required'] &&
+                    objectifForm.get('tauxExploitation')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('tauxExploitation')?.hasError('min') &&
+            objectifForm.get('tauxExploitation')?.touched
+          "
+        >
+          Le Taux d'Exploitation doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Delta P Microfiltre</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="deltaPMicrofiltre"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('deltaPMicrofiltre')?.errors?.['required'] &&
+                    objectifForm.get('deltaPMicrofiltre')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('deltaPMicrofiltre')?.hasError('min') &&
+            objectifForm.get('deltaPMicrofiltre')?.touched
+          "
+        >
+          Delta P Microfiltre doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Delta P Membrane</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="deltaPMembrane"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('deltaPMembrane')?.errors?.['required'] &&
+                    objectifForm.get('deltaPMembrane')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('deltaPMembrane')?.hasError('min') &&
+            objectifForm.get('deltaPMembrane')?.touched
+          "
+        >
+          Delta P Membrane doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Delta P Sable</mat-label>
+        <input matInput type="number" formControlName="deltaPSable" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('deltaPSable')?.errors?.['required'] &&
+                    objectifForm.get('deltaPSable')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('deltaPSable')?.hasError('min') &&
+            objectifForm.get('deltaPSable')?.touched
+          "
+        >
+          Delta P Sable doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Cout</mat-label>
+        <input matInput type="number" formControlName="cout" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('cout')?.errors?.['required'] &&
+                    objectifForm.get('cout')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('cout')?.hasError('min') &&
+            objectifForm.get('cout')?.touched
+          "
+        >
+          Le Cout doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>TH</mat-label>
+        <input matInput type="number" formControlName="th" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('th')?.errors?.['required'] &&
+                    objectifForm.get('th')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('th')?.hasError('min') &&
+            objectifForm.get('th')?.touched
+          "
+        >
+          Le th doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>PH</mat-label>
+        <input matInput type="number" formControlName="ph" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('ph')?.errors?.['required'] &&
+                    objectifForm.get('ph')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('ph')?.hasError('min') &&
+            objectifForm.get('ph')?.touched
+          "
+        >
+          Le ph doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Taux Chlorure</mat-label>
+        <input matInput type="number" formControlName="tauxChlorure" required />
+        <mat-error
+          *ngIf="
+                    objectifForm.get('tauxChlorure')?.errors?.['required'] &&
+                    objectifForm.get('tauxChlorure')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            objectifForm.get('tauxChlorure')?.hasError('min') &&
+            objectifForm.get('tauxChlorure')?.touched
+          "
+        >
+          Le Taux de Chlorure doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Station</mat-label>
+        <mat-select formControlName="nomStation" required>
+          <mat-option
+            *ngFor="let station of stations$ | async"
+            [value]="station.nomStation"
+          >
+            {{ station.nomStation }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                                objectifForm.get('nomStation')?.errors?.['required'] &&
+                                objectifForm.get('nomStation')?.touched
+                              "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="objectifForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

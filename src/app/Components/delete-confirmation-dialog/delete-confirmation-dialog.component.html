@@ -1,0 +1,112 @@
+<h2 mat-dialog-title>Confirm Delete</h2>
+<div mat-dialog-content>
+  <p *ngIf="isCompteData(data)">
+    Etes-vous sur de vouloir supprimer compte: {{ data.compte.nom }} ?
+  </p>
+  <p *ngIf="isFilialeData(data)">
+    Etes-vous sur de vouloir supprimer filiale: {{ data.filiale.nomFiliale }} ?
+  </p>
+  <p *ngIf="isAtelierData(data)">
+    Etes-vous sur de vouloir supprimer atelier: {{ data.atelier.nomAtelier }} ?
+  </p>
+  <p *ngIf="isStationData(data)">
+    Etes-vous sur de vouloir supprimer station: {{ data.station.nomStation }} ?
+  </p>
+  <p *ngIf="isBassinData(data)">
+    Etes-vous sur de vouloir supprimer bassin: {{ data.bassin.nomSourceEau }} ?
+  </p>
+  <p *ngIf="isPuitData(data)">
+    Etes-vous sur de vouloir supprimer puit: {{ data.puit.nomSourceEau }} ?
+  </p>
+  <p *ngIf="isEntretienSourceEauData(data)">
+    Etes-vous sur de vouloir supprimer Entretien Source Eau:
+    {{ data.entretienSourceEau.nomEntretienSourceEau }} ?
+  </p>
+  <p *ngIf="isEntretienStationData(data)">
+    Etes-vous sur de vouloir supprimer Entretien Station:
+    {{ data.entretienStation.nomEntretienStation }} ?
+  </p>
+  <p *ngIf="isLavageChimiqueData(data)">
+    Etes-vous sur de vouloir supprimer Lavage Chimique:
+    {{ data.lavageChimique.nomLavageChimique }} ?
+  </p>
+  <p *ngIf="isEquipementData(data)">
+    Etes-vous sur de vouloir supprimer Equipement:
+    {{ data.equipement.labelEquipement }} ?
+  </p>
+  <p *ngIf="isNatureEquipementData(data)">
+    Etes-vous sur de vouloir supprimer Nature Equipement:
+    {{ data.natureEquipement.labelNatureEquipement }} ?
+  </p>
+  <p *ngIf="isTypeEquipementData(data)">
+    Etes-vous sur de vouloir supprimer Type Equipement:
+    {{ data.typeEquipement.labelTypeEquipement }} ?
+  </p>
+  <p *ngIf="isCartoucheData(data)">
+    Etes-vous sur de vouloir supprimer Cartouche:
+    {{ data.cartouche.labelProduitConsommable }} ?
+  </p>
+  <p *ngIf="isTypeCartoucheData(data)">
+    Etes-vous sur de vouloir supprimer Type Cartouche:
+    {{ data.typeCartouche.labelTypeCartouche }} ?
+  </p>
+  <p *ngIf="isMembraneData(data)">
+    Etes-vous sur de vouloir supprimer Membrane:
+    {{ data.membrane.labelProduitConsommable }} ?
+  </p>
+  <p *ngIf="isTypeMembraneData(data)">
+    Etes-vous sur de vouloir supprimer Type Membrane:
+    {{ data.typeMembrane.labelTypeMembrane }} ?
+  </p>
+  <p *ngIf="isCategorieProduitChimiqueData(data)">
+    Etes-vous sur de vouloir supprimer Categorie Produit Chimique:
+    {{ data.categorieProduitChimique.nomCategorieProduitChimique }} ?
+  </p>
+  <p *ngIf="isDosageChimiqueData(data)">
+    Etes-vous sur de vouloir supprimer Dosage Chimique:
+    {{ data.dosageChimique.nomDosageChimique }} ?
+  </p>
+  <p *ngIf="isFournisseurData(data)">
+    Etes-vous sur de vouloir supprimer Fournisseur:
+    {{ data.fournisseur.nomFournisseur }} ?
+  </p>
+  <p *ngIf="isProduitChimiqueData(data)">
+    Etes-vous sur de vouloir supprimer Produit Chimique:
+    {{ data.produitChimique.labelProduitConsommable }} ?
+  </p>
+  <p *ngIf="isUniteData(data)">
+    Etes-vous sur de vouloir supprimer Unite:
+    {{ data.unite.labelUnite }} ?
+  </p>
+  <p *ngIf="isChecklistData(data)">
+    Etes-vous sur de vouloir supprimer Checklist:
+    {{ data.checklist.labelChecklist }} ?
+  </p>
+  <p *ngIf="isObjectifData(data)">
+    Etes-vous sur de vouloir supprimer Objectif:
+    {{ data.objectif.labelObjectif }} ?
+  </p>
+  <p *ngIf="isParametreStationData(data)">
+    Etes-vous sur de vouloir supprimer Parametre Station:
+    {{ data.parametreStation.labelParametreStation }} ?
+  </p>
+  <p *ngIf="isParametreSuiviData(data)">
+    Etes-vous sur de vouloir supprimer Parametre Suivi:
+    {{ data.parametreSuivi.labelParametreSuivi }} ?
+  </p>
+  <p *ngIf="isSuiviQuotidienData(data)">
+    Etes-vous sur de vouloir supprimer Suivi Quotidien:
+    {{ data.suiviQuotidien.labelSuiviQuotidien }} ?
+  </p>
+  <p *ngIf="isTypeSuiviData(data)">
+    Etes-vous sur de vouloir supprimer Type Suivi:
+    {{ data.typeSuivi.labelTypeSuivi }} ?
+  </p>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button class="cancel" (click)="onCancel()" cdkFocusInitial>
+    Cancel
+  </button>
+  <button mat-button class="delete" (click)="onConfirm()">Delete</button>
+</div>

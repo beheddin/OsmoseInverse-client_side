@@ -1,0 +1,93 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <ng-container matColumnDef="nomEntretienStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Nom Station Entretien
+      </th>
+      <td mat-cell *matCellDef="let entretienStation">
+        {{ entretienStation.nomEntretienStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="descriptionEntretienStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Description Station Entretien
+      </th>
+      <td mat-cell *matCellDef="let entretienStation">
+        {{ entretienStation.descriptionEntretienStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="chargeEntretienStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Charge Station Entretien
+      </th>
+      <td mat-cell *matCellDef="let entretienStation">
+        {{ entretienStation.chargeEntretienStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="isExternalEntretienStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Est Externe</th>
+      <td mat-cell *matCellDef="let entretienStation">
+        <mat-slide-toggle
+          [checked]="entretienStation.isExternalEntretienStation"
+          (change)="
+            toggleIsExternalEntretienStation(
+              entretienStation.idEntretienStation
+            )
+          "
+        />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Station</th>
+      <td mat-cell *matCellDef="let entretienStation">
+        {{ entretienStation.nomStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomFournisseur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Fournisseur</th>
+      <td mat-cell *matCellDef="let entretienStation">
+        {{ entretienStation.nomFournisseur }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let entretienStation">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ entretienStation.idEntretienStation }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(entretienStation)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

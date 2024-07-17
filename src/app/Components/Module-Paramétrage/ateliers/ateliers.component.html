@@ -1,0 +1,53 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+  >
+    <!-- nomAtelier Column -->
+    <ng-container matColumnDef="nomAtelier">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Atelier</th>
+      <td mat-cell *matCellDef="let atelier">
+        {{ atelier.nomAtelier }}
+      </td>
+    </ng-container>
+    <!-- filiale Column -->
+    <ng-container matColumnDef="nomFiliale">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Filiale</th>
+      <td mat-cell *matCellDef="let atelier">
+        {{ atelier.nomFiliale }}
+      </td>
+    </ng-container>
+
+    <!-- btns col-->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let atelier">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ atelier.idAtelier }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(atelier)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

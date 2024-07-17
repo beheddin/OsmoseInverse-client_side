@@ -1,0 +1,165 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Cartouche
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/cartouches">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="cartoucheForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label> Label Cartouche</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="labelProduitConsommable"
+          required
+        />
+        <mat-error
+          *ngIf="
+                          cartoucheForm.get('labelProduitConsommable')?.errors?.['required'] &&
+                          cartoucheForm.get('labelProduitConsommable')?.touched
+                        "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                          cartoucheForm.get('labelProduitConsommable')?.errors?.['minlength'] &&
+                          cartoucheForm.get('labelProduitConsommable')?.dirty
+                        "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                          cartoucheForm.get("labelProduitConsommable")?.errors?.['minlength']
+                            ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label> Quantité</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="quantiteProduitConsommable"
+          required
+        />
+        <mat-error
+          *ngIf="
+                          cartoucheForm.get('quantiteProduitConsommable')?.errors?.['required'] &&
+                          cartoucheForm.get('quantiteProduitConsommable')?.touched
+                        "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            cartoucheForm.get('quantiteProduitConsommable')?.hasError('min') &&
+            cartoucheForm.get('quantiteProduitConsommable')?.touched
+          "
+        >
+          La quantité doit être positive
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Date d'utilisation</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dateUtilisationProduitConsommable"
+          required
+        />
+        <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+        <mat-datepicker-toggle matIconSuffix [for]="picker" />
+        <mat-datepicker #picker />
+        <mat-error
+          *ngIf="
+            cartoucheForm.get('dateUtilisationProduitConsommable')?.errors?.['required'] &&
+            cartoucheForm.get('dateUtilisationProduitConsommable')?.touched
+          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Station</mat-label>
+        <mat-select formControlName="nomStation" required>
+          <mat-option
+            *ngFor="let station of stations$ | async"
+            [value]="station.nomStation"
+          >
+            {{ station.nomStation }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                      cartoucheForm.get('nomStation')?.errors?.['required'] &&
+                      cartoucheForm.get('nomStation')?.touched
+                    "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Unité</mat-label>
+        <mat-select formControlName="labelUnite" required>
+          <mat-option
+            *ngFor="let unite of unites$ | async"
+            [value]="unite.labelUnite"
+          >
+            {{ unite.labelUnite }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                      cartoucheForm.get('LabelUnite')?.errors?.['required'] &&
+                      cartoucheForm.get('LabelUnite')?.touched
+                    "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type Cartouche</mat-label>
+        <mat-select formControlName="labelTypeCartouche" required>
+          <mat-option
+            *ngFor="let typeCartouche of typesCartouches$ | async"
+            [value]="typeCartouche.labelTypeCartouche"
+          >
+            {{ typeCartouche.labelTypeCartouche }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                      cartoucheForm.get('LabelTypeCartouche')?.errors?.['required'] &&
+                      cartoucheForm.get('LabelTypeCartouche')?.touched
+                    "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="cartoucheForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- {{ cartoucheForm.value | json }} -->

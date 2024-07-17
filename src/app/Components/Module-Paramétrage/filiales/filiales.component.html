@@ -1,0 +1,55 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+  >
+    <!-- nomFiliale Column -->
+    <ng-container matColumnDef="nomFiliale">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Filiale</th>
+      <td mat-cell *matCellDef="let filiale">
+        {{ filiale.nomFiliale }}
+      </td>
+    </ng-container>
+    <!-- abbreviationNomFiliale Column -->
+    <ng-container matColumnDef="abbreviationNomFiliale">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Abbr. Filiale</th>
+      <td mat-cell *matCellDef="let filiale">
+        {{ filiale.abbreviationNomFiliale }}
+      </td>
+    </ng-container>
+
+    <!-- btns col-->
+    <ng-container matColumnDef="actions">
+      <!-- <th mat-header-cell *matHeaderCellDef>Actions</th> -->
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let filiale">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ filiale.idFiliale }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(filiale)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

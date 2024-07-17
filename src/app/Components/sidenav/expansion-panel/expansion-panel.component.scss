@@ -1,0 +1,17 @@
+button {
+  width: 100%;
+
+  &:hover,
+  &.active {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
+}
+
+mat-expansion-panel button[mat-button] {
+  margin-bottom: 10px;
+}
+
+// mat-panel-title {
+//    font-size: 15px;
+// }

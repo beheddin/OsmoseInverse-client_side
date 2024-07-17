@@ -1,0 +1,65 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <!-- Nom Source d'Eau Column -->
+    <ng-container matColumnDef="nomSourceEau">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Nom Source d'Eau
+      </th>
+      <td mat-cell *matCellDef="let bassin">{{ bassin.nomSourceEau }}</td>
+    </ng-container>
+
+    <!-- Volume d'Eau Column -->
+    <ng-container matColumnDef="volumeEau">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Volume d'Eau</th>
+      <td mat-cell *matCellDef="let bassin">{{ bassin.volumeEau }}</td>
+    </ng-container>
+
+    <!-- Descriminant Column -->
+    <ng-container matColumnDef="descriminant">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descriminant</th>
+      <td mat-cell *matCellDef="let bassin">{{ bassin.descriminant }}</td>
+    </ng-container>
+
+    <!-- Nom Filiale Column -->
+    <ng-container matColumnDef="nomFiliale">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Filiale</th>
+      <td mat-cell *matCellDef="let bassin">{{ bassin.nomFiliale }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let bassin">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ bassin.idSourceEau }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(bassin)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

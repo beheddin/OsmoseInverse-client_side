@@ -1,0 +1,120 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Station
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/stations">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="stationForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Station</mat-label>
+        <input matInput type="text" formControlName="nomStation" required />
+        <mat-error
+          *ngIf="
+              stationForm.get('nomStation')?.errors?.['required'] &&
+              stationForm.get('nomStation')?.touched
+            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+              stationForm.get('nomStation')?.errors?.['minlength'] &&
+              stationForm.get('nomStation')?.dirty
+            "
+        >
+          Ce champ doit contenir au minimum
+          {{ stationForm.get("nomStation")?.errors?.['minlength']?.requiredLength }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Capacité</mat-label>
+        <input matInput type="number" formControlName="capaciteStation" />
+        <mat-error
+          *ngIf="
+              stationForm.get('capaciteStation')?.errors?.['required'] &&
+              stationForm.get('capaciteStation')?.touched
+            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            stationForm.get('capaciteStation')?.hasError('min') &&
+            stationForm.get('capaciteStation')?.touched
+          "
+        >
+          La capacité doit être positive
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Type Ammortissement </mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="typeAmmortissement"
+          required
+        />
+        <mat-error
+          *ngIf="
+              stationForm.get('typeAmmortissement')?.errors?.['required'] &&
+              stationForm.get('typeAmmortissement')?.touched
+            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+              stationForm.get('typeAmmortissement')?.errors?.['minlength'] &&
+              stationForm.get('typeAmmortissement')?.dirty
+            "
+        >
+          Ce champ doit contenir au minimum
+          {{ stationForm.get("typeAmmortissement")?.errors?.['minlength']?.requiredLength }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="isActif" labelPosition="before"
+        >Est Active :</mat-checkbox
+      >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Atelier</mat-label>
+        <mat-select formControlName="nomAtelier" required>
+          <mat-option
+            *ngFor="let atelier of ateliers$ | async"
+            [value]="atelier.nomAtelier"
+          >
+            {{ atelier.nomAtelier }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+              stationForm.get('nomAtelier')?.errors?.['required'] &&
+              stationForm.get('nomAtelier')?.touched
+            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="stationForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

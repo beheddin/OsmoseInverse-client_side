@@ -1,0 +1,75 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <!-- nomSourceEau Column -->
+    <ng-container matColumnDef="nomSourceEau">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Nom Source d'Eau
+      </th>
+      <td mat-cell *matCellDef="let puit">{{ puit.nomSourceEau }}</td>
+    </ng-container>
+
+    <!-- volumeEau Column -->
+    <ng-container matColumnDef="volumeEau">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Volume d'Eau</th>
+      <td mat-cell *matCellDef="let puit">{{ puit.volumeEau }}</td>
+    </ng-container>
+
+    <!-- descriminant Column -->
+    <ng-container matColumnDef="descriminant">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Descriminant</th>
+      <td mat-cell *matCellDef="let puit">{{ puit.descriminant }}</td>
+    </ng-container>
+
+    <!-- nomFiliale Column -->
+    <ng-container matColumnDef="nomFiliale">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Filiale</th>
+      <td mat-cell *matCellDef="let puit">{{ puit.nomFiliale }}</td>
+    </ng-container>
+
+    <!-- profondeur Column -->
+    <ng-container matColumnDef="profondeur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Profondeur</th>
+      <td mat-cell *matCellDef="let puit">{{ puit.profondeur }}</td>
+    </ng-container>
+
+    <!-- typeAmortissement Column -->
+    <ng-container matColumnDef="typeAmortissement">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Type Amortissement
+      </th>
+      <td mat-cell *matCellDef="let puit">{{ puit.typeAmortissement }}</td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let puit">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ puit.idSourceEau }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-fab class="action-btn delete" (click)="openDialog(puit)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

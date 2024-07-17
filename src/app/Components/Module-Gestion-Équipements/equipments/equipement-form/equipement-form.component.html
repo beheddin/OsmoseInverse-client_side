@@ -1,0 +1,118 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Equipement
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/equipements">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="equipementForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label> Label Equipement</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="labelEquipement"
+          required
+        />
+        <mat-error
+          *ngIf="
+                        equipementForm.get('labelEquipement')?.errors?.['required'] &&
+                        equipementForm.get('labelEquipement')?.touched
+                      "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                        equipementForm.get('labelEquipement')?.errors?.['minlength'] &&
+                        equipementForm.get('labelEquipement')?.dirty
+                      "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                        equipementForm.get("labelEquipement")?.errors?.['minlength']
+                          ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Station</mat-label>
+        <mat-select formControlName="nomStation" required>
+          <mat-option
+            *ngFor="let station of stations$ | async"
+            [value]="station.nomStation"
+          >
+            {{ station.nomStation }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                    equipementForm.get('nomStation')?.errors?.['required'] &&
+                    equipementForm.get('nomStation')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nature Equipement</mat-label>
+        <mat-select formControlName="labelNatureEquipement" required>
+          <mat-option
+            *ngFor="let naturesEquipement of naturesEquipements$ | async"
+            [value]="naturesEquipement.labelNatureEquipement"
+          >
+            {{ naturesEquipement.labelNatureEquipement }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                    equipementForm.get('labelNatureEquipement')?.errors?.['required'] &&
+                    equipementForm.get('labelNatureEquipement')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type Equipement</mat-label>
+        <mat-select formControlName="labelTypeEquipement" required>
+          <mat-option
+            *ngFor="let typeEquipement of typesEquipements$ | async"
+            [value]="typeEquipement.labelTypeEquipement"
+          >
+            {{ typeEquipement.labelTypeEquipement }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                    equipementForm.get('LabelTypeEquipement')?.errors?.['required'] &&
+                    equipementForm.get('LabelTypeEquipement')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="equipementForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- {{ equipementForm.value | json }} -->

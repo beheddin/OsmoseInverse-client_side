@@ -1,0 +1,42 @@
+<!-- <mat-grid-list cols="2" rowHeight="1:1"> -->
+<!-- <div class="centered-container"> -->
+<mat-grid-list [cols]="compteData ? 2 : 1" rowHeight="100vh">
+  <mat-grid-tile>
+    <div *ngIf="compteData; else loadingTemplate" class="centered-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-icon fontIcon="person" class="card-icon" />
+        </mat-card-header>
+        <mat-card-content>
+          <p><strong>Name:</strong> {{ compteData.nom }}</p>
+          <p><strong>CIN:</strong> {{ compteData.cin }}</p>
+          <p><strong>Role:</strong> {{ compteData.nomRole }}</p>
+          <p><strong>Filiale:</strong> {{ compteData.nomFiliale }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button
+            mat-raised-button
+            class="form-submit-btn"
+            routerLink="change-password/{{ compteData.idCompte }}"
+          >
+            Modifier Password
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile *ngIf="compteData">
+    <div class="centered-container">
+      <!-- <div class=" bg2"> -->
+
+      <router-outlet />
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<ng-template #loadingTemplate>
+  <!-- <div class=" bg1"> -->
+  <div class="centered-container">
+    <mat-spinner class="spinner"></mat-spinner>
+  </div>
+</ng-template>

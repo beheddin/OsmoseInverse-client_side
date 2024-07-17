@@ -1,0 +1,120 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Lavage Chimique
+    </mat-card-title>
+    <button
+      mat-mini-fab
+      class="action-btn close"
+      routerLink="/lavages-chimiques"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="lavageChimiqueForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Lavage Chimique</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="nomLavageChimique"
+          required
+        />
+        <mat-error
+          *ngIf="
+                                lavageChimiqueForm.get('nomLavageChimique')?.errors?.['required'] &&
+                                lavageChimiqueForm.get('nomLavageChimique')?.touched
+                              "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                                lavageChimiqueForm.get('nomLavageChimique')?.errors?.['minlength'] &&
+                                lavageChimiqueForm.get('nomLavageChimique')?.dirty
+                              "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                                lavageChimiqueForm.get("nomLavageChimique")?.errors?.['minlength']
+                                  ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Date du lavage</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dateLavageChimique"
+          required
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker" />
+        <mat-datepicker #picker />
+        <mat-error
+          *ngIf="
+                  lavageChimiqueForm.get('dateLavageChimique')?.errors?.['required'] &&
+                  lavageChimiqueForm.get('dateLavageChimique')?.touched
+                "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Produit Chimique</mat-label>
+        <mat-select formControlName="labelProduitChimique" required>
+          <mat-option
+            *ngFor="let produitChimique of produitsChimiques$ | async"
+            [value]="produitChimique.labelProduitConsommable"
+          >
+            {{ produitChimique.labelProduitConsommable }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                            lavageChimiqueForm.get('labelProduitConsommable')?.errors?.['required'] &&
+                            lavageChimiqueForm.get('labelProduitConsommable')?.touched
+                          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Station</mat-label>
+        <mat-select formControlName="nomStation" required>
+          <mat-option
+            *ngFor="let station of stations$ | async"
+            [value]="station.nomStation"
+          >
+            {{ station.nomStation }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                            lavageChimiqueForm.get('nomStation')?.errors?.['required'] &&
+                            lavageChimiqueForm.get('nomStation')?.touched
+                          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="lavageChimiqueForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

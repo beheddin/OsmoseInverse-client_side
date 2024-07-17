@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Type Cartouche
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/cartouches">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="typeCartoucheForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label> Label Type Cartouche</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="labelTypeCartouche"
+          required
+        />
+        <mat-error
+          *ngIf="
+                              typeCartoucheForm.get('labelTypeCartouche')?.errors?.['required'] &&
+                              typeCartoucheForm.get('labelTypeCartouche')?.touched
+                            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                              typeCartoucheForm.get('labelTypeCartouche')?.errors?.['minlength'] &&
+                              typeCartoucheForm.get('labelTypeCartouche')?.dirty
+                            "
+        >
+          Ce champ doit contenir au minimum
+          {{
+              typeCartoucheForm.get("labelTypeCartouche")?.errors?.['minlength']
+                                ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="typeCartoucheForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- {{ typeCartoucheForm.value | json }} -->

@@ -1,0 +1,188 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Source d'Eau Entretien
+    </mat-card-title>
+    <button
+      mat-mini-fab
+      class="action-btn close"
+      routerLink="/entretiens-sources-eau"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="entretienSourceEauForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Source d'Eau Entretien</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="nomEntretienSourceEau"
+          required
+        />
+        <mat-error
+          *ngIf="
+                  entretienSourceEauForm.get('nomEntretienSourceEau')?.errors?.['required'] &&
+                  entretienSourceEauForm.get('nomEntretienSourceEau')?.touched
+                "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                  entretienSourceEauForm.get('nomEntretienSourceEau')?.errors?.['minlength'] &&
+                  entretienSourceEauForm.get('nomEntretienSourceEau')?.dirty
+                "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                  entretienSourceEauForm.get("nomEntretienSourceEau")?.errors?.['minlength']
+                    ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Description Source d'Eau Entretien</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="descriptionEntretienSourceEau"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    entretienSourceEauForm.get('descriptionEntretienSourceEau')?.errors?.['required'] &&
+                    entretienSourceEauForm.get('descriptionEntretienSourceEau')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Charge Source d'Eau Entretien</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="chargeEntretienSourceEau"
+          required
+        />
+        <mat-error
+          *ngIf="
+                    entretienSourceEauForm.get('chargeEntretienSourceEau')?.errors?.['required'] &&
+                    entretienSourceEauForm.get('chargeEntretienSourceEau')?.touched
+                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            entretienSourceEauForm
+              .get('chargeEntretienSourceEau')
+              ?.hasError('min') &&
+            entretienSourceEauForm.get('chargeEntretienSourceEau')?.touched
+          "
+        >
+          La charge doit être positive
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Charge Source d'Eau Entretien form state check -->
+      <!-- <div
+        *ngIf="
+          entretienSourceEauForm.get('chargeEntretienSourceEau')
+            ?.errors as errors
+        "
+      >
+        <pre>{{ errors | json }}</pre>
+      </div>
+      <div
+        *ngIf="
+          entretienSourceEauForm.get('chargeEntretienSourceEau')
+            ?.touched as touched
+        "
+      >
+        <pre>Touched: {{ touched }}</pre>
+      </div> -->
+
+      <mat-checkbox
+        formControlName="isExternalEntretienSourceEau"
+        labelPosition="before"
+        >Est Externe :</mat-checkbox
+      >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Descriminant</mat-label>
+        <mat-icon matPrefix>group</mat-icon>
+        <mat-select formControlName="descriminant" required>
+          <mat-option value="BassinEntretien">BassinEntretien</mat-option>
+          <mat-option value="PuitEntretien">PuitEntretien</mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            entretienSourceEauForm.get('descriminant')?.hasError('required')
+          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Source d'Eau</mat-label>
+        <mat-select formControlName="nomSourceEau" required>
+          <mat-option
+            *ngFor="let sourceEau of sourcesEau$ | async"
+            [value]="sourceEau.nomSourceEau"
+          >
+            {{ sourceEau.nomSourceEau }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                  entretienSourceEauForm.get('nomSourceEau')?.errors?.['required'] &&
+                  entretienSourceEauForm.get('nomSourceEau')?.touched
+                "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Fournisseur</mat-label>
+        <mat-select formControlName="nomFournisseur" required>
+          <mat-option
+            *ngFor="let fournisseur of fournisseurs$ | async"
+            [value]="fournisseur.nomFournisseur"
+          >
+            {{ fournisseur.nomFournisseur }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                  entretienSourceEauForm.get('nomFournisseur')?.errors?.['required'] &&
+                  entretienSourceEauForm.get('nomFournisseur')?.touched
+                "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="entretienSourceEauForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<!-- {{ entretienSourceEauForm.value | json }} -->

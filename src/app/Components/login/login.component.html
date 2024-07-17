@@ -1,0 +1,94 @@
+<div class="centered-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-icon
+        class="card-icon"
+        [ngClass]="{
+          'valid-icon': loginForm.valid,
+          'invalid-icon': !loginForm.valid
+        }"
+        >login</mat-icon
+      >
+    </mat-card-header>
+    <mat-card-content>
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        <mat-form-field appearance="fill">
+          <mat-label for="cin">Cin</mat-label>
+          <!-- <mat-icon matPrefix>badge</mat-icon> -->
+          <mat-icon matPrefix>pin</mat-icon>
+          <!-- id="name":  unique identifier for the input element. used to link with the label -->
+          <!-- name="nomFiliale": name attribute for the input element. used in form submission -->
+          <!-- #name="ngModel": Creates a template reference variable 'name' that is linked to the ngModel directive. 
+            This allows you to access the input's validation state and value in the template. -->
+          <!-- [(ngModel)]="addFilialeFormModel.nomFiliale": Two-way data binding that binds the input value to the nomFiliale property of the addFilialeFormModel object in my component. -->
+          <input
+            matInput
+            type="text"
+            id="cin"
+            name="cin"
+            #cin="ngModel"
+            [(ngModel)]="loginFormModel.cin"
+            required
+            minlength="3"
+          />
+
+          <!-- alert msgs -->
+          <mat-error *ngIf="cin.touched && cin.pristine">
+            <!-- <mat-error *ngIf="cin.invalid && cin.touched"> -->
+            Ce champ est obligatoire
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label for="password">Password</mat-label>
+          <mat-icon matPrefix>password</mat-icon>
+          <input
+            matInput
+            type="{{ hidePwd ? 'password' : 'text' }}"
+            id="password"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="loginFormModel.password"
+            required
+            minlength="3"
+          />
+          <mat-icon
+            matSuffix
+            (click)="hidePwd = !hidePwd"
+            aria-label="Toggle password visibility"
+            [attr.aria-pressed]="!hidePwd"
+          >
+            {{ hidePwd ? "visibility_off" : "visibility" }}
+          </mat-icon>
+          <!-- alert msgs -->
+          <mat-error *ngIf="password.touched && password.pristine">
+            <!-- <mat-error *ngIf="password.invalid && password.touched"> -->
+            Ce champ est obligatoire
+          </mat-error>
+        </mat-form-field>
+
+        <button
+          mat-raised-button
+          type="submit"
+          class="form-submit-btn"
+          [disabled]="loginForm.invalid || isLoading"
+        >
+          <!-- || isLoading: disable btn while isLoading -->
+          Login
+        </button>
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoading" />
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- {{ loginForm.value | json }} -->
+
+  <!-- login: var declared in .ts file -->
+  <!-- {{ login | json }} -->
+
+  <!-- Form Controls -->
+  <!-- {{ password.valid | json }}
+  {{ password.status | json }}
+  {{ password.touched | json }}
+  {{ password.errors | json }} -->
+</div>

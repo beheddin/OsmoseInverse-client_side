@@ -1,0 +1,30 @@
+<!-- <div *ngIf="isBrowser">
+  <apx-chart
+    [series]="chartOptions.series"
+    [chart]="chartOptions.chart"
+    [xaxis]="chartOptions.xaxis"
+    [dataLabels]="chartOptions.dataLabels"
+    [stroke]="chartOptions.stroke"
+    [title]="chartOptions.title"
+  ></apx-chart>
+</div> -->
+<!-- <div style="text-align: center">
+  <apx-chart
+    [series]="series"
+    [chart]="chart"
+    [xaxis]="xaxis"
+    [title]="title"
+  />
+</div> -->
+
+<div id="chart">
+  <app-apex-chart-wrapper
+    [series]="chartOptions!.series"
+    [chart]="chartOptions!.chart"
+    [xaxis]="chartOptions!.xaxis"
+    [dataLabels]="chartOptions!.dataLabels"
+    [grid]="chartOptions!.grid"
+    [stroke]="chartOptions!.stroke"
+    [title]="chartOptions!.title"
+  />
+</div>

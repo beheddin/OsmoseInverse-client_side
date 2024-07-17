@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Atelier
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/ateliers">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="atelierForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Atelier</mat-label>
+        <input matInput type="text" formControlName="nomAtelier" required />
+        <mat-error
+          *ngIf="
+              atelierForm.get('nomAtelier')?.errors?.['required'] &&
+              atelierForm.get('nomAtelier')?.touched
+            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+              atelierForm.get('nomAtelier')?.errors?.['minlength'] &&
+              atelierForm.get('nomAtelier')?.dirty
+            "
+        >
+          Ce champ doit contenir au minimum
+          {{ atelierForm.get("nomAtelier")?.errors?.['minlength']?.requiredLength }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Filiale</mat-label>
+        <mat-select formControlName="nomFiliale" required>
+          <mat-option
+            *ngFor="let filiale of filiales$ | async"
+            [value]="filiale.nomFiliale"
+          >
+            {{ filiale.nomFiliale }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+              atelierForm.get('nomFiliale')?.errors?.['required'] &&
+              atelierForm.get('nomFiliale')?.touched
+            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="atelierForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading"></mat-progress-bar>
+    </form>
+  </mat-card-content>
+</mat-card>

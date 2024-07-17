@@ -1,0 +1,148 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Puit
+    </mat-card-title>
+    <button
+      mat-mini-fab
+      class="action-btn close"
+      routerLink="/sources-eau/puits"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="puitForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Source d'Eau</mat-label>
+        <input matInput type="text" formControlName="nomSourceEau" required />
+        <mat-error
+          *ngIf="
+                puitForm.get('nomSourceEau')?.errors?.['required'] &&
+                puitForm.get('nomSourceEau')?.touched
+              "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                puitForm.get('nomSourceEau')?.errors?.['minlength'] &&
+                puitForm.get('nomSourceEau')?.dirty
+              "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                puitForm.get("nomSourceEau")?.errors?.['minlength']
+                  ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Volume d'Eau</mat-label>
+        <input matInput type="number" formControlName="volumeEau" required />
+        <mat-error
+          *ngIf="
+            puitForm.get('volumeEau')?.hasError('required') &&
+            puitForm.get('volumeEau')?.touched
+          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            puitForm.get('volumeEau')?.hasError('min') &&
+            puitForm.get('volumeEau')?.touched
+          "
+        >
+          Le volume doit être supérieur à zéro
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Filiale</mat-label>
+        <mat-select formControlName="nomFiliale" required>
+          <mat-option
+            *ngFor="let filiale of filiales$ | async"
+            [value]="filiale.nomFiliale"
+          >
+            {{ filiale.nomFiliale }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                puitForm.get('nomFiliale')?.errors?.['required'] &&
+                puitForm.get('nomFiliale')?.touched
+              "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Profondeur</mat-label>
+        <input matInput type="number" formControlName="profondeur" required />
+        <mat-error
+          *ngIf="
+            puitForm.get('profondeur')?.hasError('required') &&
+            puitForm.get('profondeur')?.touched
+          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            puitForm.get('profondeur')?.hasError('min') &&
+            puitForm.get('profondeur')?.touched
+          "
+        >
+          La profondeur doit être positive
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type Amortissement</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="typeAmortissement"
+          required
+        />
+        <mat-error
+          *ngIf="
+                puitForm.get('typeAmortissement')?.errors?.['required'] &&
+                puitForm.get('typeAmortissement')?.touched
+              "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <!-- <mat-error
+          *ngIf="
+                puitForm.get('typeAmortissement')?.errors?.['minlength'] &&
+                puitForm.get('typeAmortissement')?.dirty
+              "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                puitForm.get("typeAmortissement")?.errors?.['minlength']
+                  ?.requiredLength
+          }}
+          caractères
+        </mat-error> -->
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="puitForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

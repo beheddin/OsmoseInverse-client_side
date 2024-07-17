@@ -1,0 +1,26 @@
+// mat-card-header {
+//   display: flex;
+//   // flex-direction: row;
+//   justify-content: center;
+//   align-items: center;
+//   gap: 10px;
+// }
+
+mat-card-header .mat-icon {
+  color: var(--primary-color);
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+// .bg1 {
+//   background-color: blue;
+// }
+// .bg2 {
+//   background-color: red;
+// }

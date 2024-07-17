@@ -1,0 +1,16 @@
+<div class="add-edit-section-container">
+  <!-- method 1 -->
+  <button mat-fab class="action-btn add" routerLink="add">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <router-outlet />
+
+  <!-- method 2 -->
+  <!-- <button mat-fab class="action-btn add" (click)="showForm()"> 
+      <mat-icon>add</mat-icon>
+  </button>
+  <div *ngIf="isFormVisible">
+    <app-station-form (formClosed)="hideForm()"/>
+  </div> -->
+</div>

@@ -1,0 +1,71 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Checklist
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/checklists">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="checklistForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Checklist</mat-label>
+        <input matInput type="text" formControlName="labelChecklist" required />
+        <mat-error
+          *ngIf="
+                                          checklistForm.get('labelChecklist')?.errors?.['required'] &&
+                                          checklistForm.get('labelChecklist')?.touched
+                                        "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                                          checklistForm.get('labelChecklist')?.errors?.['minlength'] &&
+                                          checklistForm.get('labelChecklist')?.dirty
+                                        "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                                          checklistForm.get("labelChecklist")?.errors?.['minlength']
+                                            ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Station</mat-label>
+        <mat-select formControlName="nomStation" required>
+          <mat-option
+            *ngFor="let station of stations$ | async"
+            [value]="station.nomStation"
+          >
+            {{ station.nomStation }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                                    checklistForm.get('nomStation')?.errors?.['required'] &&
+                                    checklistForm.get('nomStation')?.touched
+                                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="checklistForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

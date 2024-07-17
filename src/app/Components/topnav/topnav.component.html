@@ -1,0 +1,57 @@
+<mat-toolbar>
+  <button mat-icon-button class="menu-btn" (click)="toggleSidenav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <span class="spacer"></span>
+  <app-toggle-theme />
+  <div
+    *ngIf="
+      authService.isLoggedIn() && authService.getUserDetails() as compteData;
+      else defaultTemplate
+    "
+  >
+    <button
+      mat-button
+      [matMenuTriggerFor]="profileMenu"
+      class="profile-menu-btn"
+    >
+      <span class="profile-name"> {{ compteData?.nom }}</span>
+      <mat-icon iconPositionEnd class="profile-menu-icon"
+        >compte_circle</mat-icon
+      >
+    </button>
+
+    <!-- <button
+        mat-icon-button
+        [matMenuTriggerFor]="profileMenu"
+        class="profile-menu-btn"
+      >
+        <img
+          src="assets/profiles_pictures/1.jpg"
+          alt="user"
+          class="profile-pic"
+        />
+      </button> -->
+
+    <mat-menu #profileMenu="matMenu">
+      <button mat-menu-item routerLinkActive="active" routerLink="/profile">
+        <span> Mon Profile </span>
+        <mat-icon iconPositionEnd>person</mat-icon>
+      </button>
+
+      <button mat-menu-item routerLinkActive="active" (click)="logout()">
+        <!-- <button
+        mat-menu-item
+        routerLinkActive="active"
+        routerLink="/login"
+        (click)="logout()"
+      > -->
+        <span>Log out</span>
+        <mat-icon iconPositionEnd>logout</mat-icon>
+      </button>
+    </mat-menu>
+  </div>
+
+  <ng-template #defaultTemplate />
+</mat-toolbar>

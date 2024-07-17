@@ -1,0 +1,87 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Filiale
+    </mat-card-title>
+    <button mat-mini-fab class="action-btn close" routerLink="/filiales">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="filialeForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Filiale</mat-label>
+        <input matInput type="text" formControlName="nomFiliale" required />
+        <!-- error msg -->
+        <mat-error
+          *ngIf="
+            filialeForm.get('nomFiliale')?.errors?.['required'] &&
+            filialeForm.get('nomFiliale')?.touched
+          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <!-- <mat-error *ngIf="filialeForm.get('nomFiliale')?.errors?.['required'] && filialeForm.get('nomFiliale')?.touched">
+          Ce champ est obligatoire
+        </mat-error> -->
+        <!-- hint -->
+        <mat-error
+          *ngIf="
+            filialeForm.get('nomFiliale')?.errors?.['minlength'] &&
+            filialeForm.get('nomFiliale')?.dirty
+          "
+        >
+          Ce champ doit contenir au minimum
+          {{
+            filialeForm.get("nomFiliale")?.errors?.['minlength']?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Abbreviation Nom Filiale</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="abbreviationNomFiliale"
+          required
+        />
+        <!--  -->
+        <mat-error
+          *ngIf="
+            filialeForm.get('abbreviationNomFiliale')?.errors?.['required'] &&
+            filialeForm.get('abbreviationNomFiliale')?.touched
+          "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <!-- hint -->
+        <mat-error
+          *ngIf="
+            filialeForm.get('abbreviationNomFiliale')?.errors?.['minlength'] &&
+            filialeForm.get('abbreviationNomFiliale')?.dirty
+          "
+        >
+          Ce champ doit contenir au minimum
+          {{
+            filialeForm.get("abbreviationNomFiliale")?.errors?.['minlength']?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="filialeForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

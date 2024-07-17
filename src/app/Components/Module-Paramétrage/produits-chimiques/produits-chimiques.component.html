@@ -1,0 +1,86 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <ng-container matColumnDef="labelProduitConsommable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Label Produit Chimique
+      </th>
+      <td mat-cell *matCellDef="let membrane">
+        {{ membrane.labelProduitConsommable }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantiteProduitConsommable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantité</th>
+      <td mat-cell *matCellDef="let membrane">
+        {{ membrane.quantiteProduitConsommable }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateUtilisationProduitConsommable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Date d'utilisation
+      </th>
+      <td mat-cell *matCellDef="let membrane">
+        {{ membrane.dateUtilisationProduitConsommable | date : "MM/dd/yyyy" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Station</th>
+      <td mat-cell *matCellDef="let membrane">
+        {{ membrane.nomStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="labelUnite">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Unite</th>
+      <td mat-cell *matCellDef="let membrane">
+        {{ membrane.labelUnite }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomCategorieProduitChimique">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Catégorie Produit Chimique
+      </th>
+      <td mat-cell *matCellDef="let membrane">
+        {{ membrane.nomCategorieProduitChimique }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let membrane">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ membrane.idProduitConsommable }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(membrane)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

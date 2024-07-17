@@ -1,0 +1,17 @@
+.error-container {
+  height: 100vh;
+}
+
+mat-card {
+  max-width: 400px;
+  text-align: center;
+}
+
+mat-icon {
+  color: var(--warn-color);
+}
+
+p {
+  line-height: 2;
+  white-space: pre-line; //preserves white space and line breaks in the text
+}

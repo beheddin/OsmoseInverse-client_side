@@ -1,0 +1,126 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title>
+      {{ isEditMode ? "Modifier" : "Ajouter" }} Dosage Chimique
+    </mat-card-title>
+    <button
+      mat-mini-fab
+      class="action-btn close"
+      routerLink="/dosages-chimiques"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="dosageChimiqueForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>Nom Dosage Chimique</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="nomDosageChimique"
+          required
+        />
+        <mat-error
+          *ngIf="
+                                  dosageChimiqueForm.get('nomDosageChimique')?.errors?.['required'] &&
+                                  dosageChimiqueForm.get('nomDosageChimique')?.touched
+                                "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+                                  dosageChimiqueForm.get('nomDosageChimique')?.errors?.['minlength'] &&
+                                  dosageChimiqueForm.get('nomDosageChimique')?.dirty
+                                "
+        >
+          Ce champ doit contenir au minimum
+          {{
+                                  dosageChimiqueForm.get("nomDosageChimique")?.errors?.['minlength']
+                                    ?.requiredLength
+          }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Configuration Pompe</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="configurationPompe"
+          required
+        />
+        <mat-error
+          *ngIf="
+                                    dosageChimiqueForm.get('configurationPompe')?.errors?.['required'] &&
+                                    dosageChimiqueForm.get('configurationPompe')?.touched
+                                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Concentration Dosage Chimique</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="concentrationDosageChimique"
+          required
+        />
+        <mat-error
+          *ngIf="
+                                    dosageChimiqueForm.get('concentrationDosageChimique')?.errors?.['required'] &&
+                                    dosageChimiqueForm.get('concentrationDosageChimique')?.touched
+                                  "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error
+          *ngIf="
+            dosageChimiqueForm
+              .get('concentrationDosageChimique')
+              ?.hasError('min') &&
+            dosageChimiqueForm.get('concentrationDosageChimique')?.touched
+          "
+        >
+          La concentration doit être positive
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Produit Chimique</mat-label>
+        <mat-select formControlName="labelProduitChimique" required>
+          <mat-option
+            *ngFor="let produitChimique of produitsChimiques$ | async"
+            [value]="produitChimique.labelProduitConsommable"
+          >
+            {{ produitChimique.labelProduitConsommable }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+                              dosageChimiqueForm.get('labelProduitConsommable')?.errors?.['required'] &&
+                              dosageChimiqueForm.get('labelProduitConsommable')?.touched
+                            "
+        >
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="dosageChimiqueForm.invalid || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <mat-progress-bar mode="determinate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+</mat-card>

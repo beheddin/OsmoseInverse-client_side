@@ -1,0 +1,82 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <ng-container matColumnDef="labelProduitConsommable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Cartouche</th>
+      <td mat-cell *matCellDef="let cartouche">
+        {{ cartouche.labelProduitConsommable }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantiteProduitConsommable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantité</th>
+      <td mat-cell *matCellDef="let cartouche">
+        {{ cartouche.quantiteProduitConsommable }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateUtilisationProduitConsommable">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Date d'utilisation
+      </th>
+      <td mat-cell *matCellDef="let cartouche">
+        {{ cartouche.dateUtilisationProduitConsommable | date : "MM/dd/yyyy" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Station</th>
+      <td mat-cell *matCellDef="let cartouche">
+        {{ cartouche.nomStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="labelUnite">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Label Unite</th>
+      <td mat-cell *matCellDef="let cartouche">
+        {{ cartouche.labelUnite }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="labelTypeCartouche">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Type Cartouche</th>
+      <td mat-cell *matCellDef="let cartouche">
+        {{ cartouche.labelTypeCartouche }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let cartouche">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ cartouche.idProduitConsommable }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(cartouche)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

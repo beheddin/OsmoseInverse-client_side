@@ -1,0 +1,340 @@
+/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat; // Import  Angular Material theming functions
+@include mat.core(); // Include Angular Material core styles
+
+// $light-theme: mat.define-theme(
+//   (
+//     color: (
+//       theme-type: light,
+//       primary: mat.$blue-palette,
+//     ),
+//   )
+// );
+
+//custom color palette
+// $my-blue-palette: (
+//     50 : #e4f2fe,
+//     100 : #bce0fb,
+//     200 : #90cbf9,
+//     300 : #64b6f7,
+//     400 : #42a6f5,
+//     500 : #2196f3,
+//     600 : #1d8ef1,
+//     700 : #1883ef,
+//     800 : #1479ed,
+//     900 : #0b68ea,
+//     A100 : #ffffff,
+//     A200 : #e1ecff,
+//     A400 : #aeccff,
+//     A700 : #95bcff,
+//     contrast: (
+//         50 : #000000,
+//         100 : #000000,
+//         200 : #000000,
+//         300 : #000000,
+//         400 : #000000,
+//         500 : #ffffff,
+//         600 : #ffffff,
+//         700 : #ffffff,
+//         800 : #ffffff,
+//         900 : #ffffff,
+//         A100 : #000000,
+//         A200 : #000000,
+//         A400 : #000000,
+//         A700 : #000000,
+//     )
+// );
+
+//LIGHT THEME
+// Define custom color palettes
+$green-palette: mat.define-palette(mat.$green-palette);
+$amber-palette: mat.define-palette(mat.$amber-palette);
+$red-palette: mat.define-palette(mat.$red-palette);
+$grey-palette: mat.define-palette(mat.$grey-palette);
+$blue-palette: mat.define-palette(mat.$blue-palette);
+$purple-palette: mat.define-palette(mat.$purple-palette);
+
+//typography
+// $my-typography: mat.define-typography-config(
+//   $font-family: "Roboto, sans-serif",
+// );
+
+// Define the light theme
+$light-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $green-palette,
+      accent: $amber-palette,
+      warn: $red-palette,
+      // error: $light-error-palette,
+      surface: $grey-palette,
+      // background: $white-palette,
+      addBtn: $blue-palette,
+      changePasswordBtn: $purple-palette,
+    ),
+    // typography: $my-typography,
+    // density: 0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+  )
+);
+
+// Extract and assign colors to CSS variables
+:root {
+  --primary-color: #{mat.get-color-from-palette($green-palette, 500)};
+  --accent-color: #{mat.get-color-from-palette($amber-palette, 500)};
+  --warn-color: #{mat.get-color-from-palette($red-palette, 500)};
+  // --error-color: #{mat.get-color-from-palette($light-error-palette)};
+  --surface-color-100: #{mat.get-color-from-palette($grey-palette, 100)};
+  --surface-color-200: #{mat.get-color-from-palette($grey-palette, 200)};
+  --white-color: #{mat.get-color-from-palette($grey-palette, 50)};
+  --black-color: #{mat.get-color-from-palette($grey-palette, 900)};
+
+  --addBtn-color: #{mat.get-color-from-palette($blue-palette)};
+  --changePassword-color: #{mat.get-color-from-palette($purple-palette)};
+}
+
+//DARK THEME
+// Define the dark theme
+$dark-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $green-palette,
+      accent: $amber-palette,
+    ),
+    // density: 0,
+  )
+);
+
+// Extract and assign colors to CSS variables for dark theme
+// .dark-theme {
+//   --primary-color: #{mat.get-color-from-palette($green-palette)};
+// }
+
+//method 1
+// apply the light theme globally
+@include mat.all-component-themes($light-theme);
+
+//apply the dark theme with this class
+.dark-theme {
+  @include mat.all-component-colors($dark-theme);
+}
+
+//method 2
+// // Apply the light theme when the body has the class 'light-theme'
+// body.light-theme {
+//   @include mat.all-component-themes($light-theme);
+// }
+
+// // Apply the dark theme when the body has the class 'dark-theme'
+// body.dark-theme {
+//   @include mat.all-component-colors($dark-theme);
+// }
+
+/**/
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0; //keep the topnav bar fixed to the top
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/**/
+
+//FORMS & CARDS GLOBAL STYLE
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // center items vertically
+  align-items: center; // center items horizontally
+  width: 100%;
+  height: 100vh; // take the full height of the page
+}
+
+// mat-card[mat-card-header] {
+//   width: 100%;
+//   height:auto;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 420px;
+  // width: 100%;
+  gap: 10px;
+  // padding: 10px;
+}
+
+.card-header-with-close-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  button {
+    margin-right: 10px;
+  }
+}
+
+mat-card-header.mat-mdc-card-header {
+  // padding: 0px 20px 0px 20px;
+  padding: 0;
+}
+
+mat-card-title {
+  flex: 1; // expand to take remaining space
+  text-align: center; //center the text
+}
+
+//card header icon
+mat-icon.card-icon {
+  font-size: 80px;
+  width: 100%;
+  height: 100%;
+}
+
+mat-form-field {
+  width: 100%; // field takes up the full width of the form
+  margin-bottom: 5px;
+}
+
+mat-checkbox {
+  margin-bottom: 15px;
+}
+
+mat-error,
+mat-hint {
+  font-size: 12px;
+}
+
+button.form-submit-btn {
+  width: 100%;
+  margin-top: 10px;
+
+  &:not([disabled]) {
+    background-color: var(--primary-color);
+    color: var(--white-color); // white for btn text
+  }
+}
+
+mat-progress-bar {
+  margin-top: 15px;
+}
+
+//MANAGEMENT PAGES GLOBAL STYLE
+// .title {
+//   text-align: center;
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+// }
+
+//add & edit section
+.add-edit-section-container {
+  padding: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+//table section
+table[mat-table] {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.table-container {
+  margin: 0px 20px 20px 20px;
+}
+
+th[mat-header-cell] {
+  border-right: 2px solid var(--surface-color-200);
+  border-bottom: 2px solid var(--surface-color-200);
+  // text-align: center;
+}
+
+th .mat-sort-header-container {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-evenly;
+  // align-items: center;
+}
+
+td[mat-cell] {
+  text-align: center;
+}
+
+// tr[mat-header-row],
+// tr[mat-row] {
+//   display: flex;
+//   width: 100%;
+// }
+
+tr[mat-row] {
+  td {
+    padding: 10px 10px;
+  }
+}
+
+.endnote {
+  font-style: italic;
+  font-size: small;
+}
+
+//action btns: add, update & delete btns
+.actions-btns-container {
+  display: flex;
+  flex-direction: row;
+  // justify-content: flex-end;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; // adds space between the btns
+  // margin: 8px;
+}
+
+button.action-btn {
+  // transition: background-color 0.3s;
+  // color: white;
+  color: var(--white-color);
+  &.add {
+    background-color: var(--addBtn-color); //cornflowerblue: blue 600
+    border-radius: 10%;
+  }
+
+  &.close {
+    // background-color: #ffb300; //orange: amber 600
+    background-color: var(--accent-color); //orange: amber 600
+    color: var(--black-color);
+    border-radius: 100%; //round btn
+  }
+
+  &.edit {
+    // background-color: #43a047; //forestgreen: green 600
+    background-color: var(--primary-color);
+    border-radius: 10%;
+  }
+
+  &.changePassword {
+    // background-color: #fb8c00; //darkorange: orange 600
+    background-color: var(--changePassword-color);
+    border-radius: 10%;
+  }
+
+  &.delete {
+    // background-color: #e53935; //crimson: red 600
+    background-color: var(--warn-color);
+    border-radius: 10%;
+  }
+
+  &:hover {
+    filter: brightness(0.9); // Darken the button on hover
+  }
+}

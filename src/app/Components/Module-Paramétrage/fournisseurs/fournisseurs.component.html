@@ -1,0 +1,80 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <ng-container matColumnDef="nomFournisseur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nom Fournisseur</th>
+      <td mat-cell *matCellDef="let fournisseur">
+        {{ fournisseur.nomFournisseur }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numTelFournisseur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Num. Tel. Fournisseur
+      </th>
+      <td mat-cell *matCellDef="let fournisseur">
+        {{ fournisseur.numTelFournisseur }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numFaxFournisseur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Num. Fax Fournisseur
+      </th>
+      <td mat-cell *matCellDef="let fournisseur">
+        {{ fournisseur.numFaxFournisseur }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="emailFournisseur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Email Fournisseur
+      </th>
+      <td mat-cell *matCellDef="let fournisseur">
+        {{ fournisseur.emailFournisseur }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="addresseFournisseur">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Addresse Fournisseur
+      </th>
+      <td mat-cell *matCellDef="let fournisseur">
+        {{ fournisseur.addresseFournisseur }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let fournisseur">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ fournisseur.idFournisseur }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(fournisseur)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

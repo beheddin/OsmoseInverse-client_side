@@ -1,0 +1,246 @@
+<mat-card>
+  <mat-card-header class="card-header-with-close-btn">
+    <div mat-card-avatar></div>
+    <mat-card-title
+      >{{ isEditMode ? "Modifier" : "Ajouter" }} Compte</mat-card-title
+    >
+    <!-- method 1 -->
+    <button mat-mini-fab class="action-btn close" routerLink="/comptes">
+      <!-- method 2 -->
+      <!-- <button mat-mini-fab class="action-btn close" (click)="onClick()"> -->
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+      <mat-form-field appearance="fill">
+        <mat-label for="fullName">Nom</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input
+          matInput
+          type="text"
+          id="fullName"
+          name="fullName"
+          #fullName="ngModel"
+          [(ngModel)]="compteForm.nom"
+          required
+          minlength="3"
+        />
+        <mat-error *ngIf="fullName.touched && fullName.pristine">
+          Ce champ est obligatoire
+        </mat-error>
+        <mat-error *ngIf="fullName.invalid && fullName.dirty">
+          Ce champ doit contenir au minimum
+          {{ fullName.errors?.['minlength']?.requiredLength }}
+          caractères
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label for="cin">CIN</mat-label>
+        <!-- <mat-icon matPrefix>id_card</mat-icon> -->
+        <!-- <mat-icon matPrefix>badge</mat-icon> -->
+        <mat-icon matPrefix>pin</mat-icon>
+        <!-- <mat-icon matPrefix>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M560-440h200v-80H560v80Zm0-120h200v-80H560v80ZM200-320h320v-22q0-45-44-71.5T360-440q-72 0-116 26.5T200-342v22Zm160-160q33 0 56.5-23.5T440-560q0-33-23.5-56.5T360-640q-33 0-56.5 23.5T280-560q0 33 23.5 56.5T360-480ZM160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm0 0v-480 480Z"/></svg>
+          </mat-icon> -->
+        <input
+          matInput
+          type="number"
+          id="cin"
+          name="cin"
+          #cin="ngModel"
+          [(ngModel)]="compteForm.cin"
+          required
+          [minLengthNumber]="3"
+          positiveNumber
+        />
+        <!-- minlength= only use with input type="text" -->
+        <!-- alert msgs -->
+        <mat-error *ngIf="cin.errors?.['required'] && cin.touched"
+          >Ce champ est obligatoire</mat-error
+        >
+        <mat-error *ngIf="cin.hasError('minLengthNumber') && cin.dirty">
+          <!-- OR -->
+          <!-- <mat-error *ngIf="cin.errors?.['minLengthNumber']  && cin.dirty"> -->
+          Ce champ doit contenir au minimum
+          {{ cin.errors?.['minLengthNumber']?.requiredLength }} caractères
+        </mat-error>
+
+        <mat-error *ngIf="cin.hasError('notPositive') && cin.dirty">
+          Ce champ doit être positif
+        </mat-error>
+      </mat-form-field>
+
+      <div *ngIf="!isEditMode">
+        <mat-form-field appearance="fill">
+          <mat-label for="password">Password</mat-label>
+          <!-- <mat-icon matPrefix>lock</mat-icon> -->
+          <!-- <mat-icon matPrefix>key</mat-icon> -->
+          <mat-icon matPrefix>password</mat-icon>
+          <!-- <input
+            matInput
+            type="{{ hidePwd ? 'password' : 'text' }}"
+            id="password"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="compteForm.password"
+            required
+            minlength="3"
+            password="password"
+          /> -->
+          <input
+            matInput
+            type="{{ hidePwd ? 'password' : 'text' }}"
+            id="password"
+            name="password"
+            #password="ngModel"
+            [(ngModel)]="compteForm.password"
+            required
+            minlength="3"
+          />
+          <mat-icon
+            matSuffix
+            (click)="hidePwd = !hidePwd"
+            aria-label="Toggle password visibility"
+            [attr.aria-pressed]="!hidePwd"
+          >
+            {{ hidePwd ? "visibility_off" : "visibility" }}
+          </mat-icon>
+
+          <mat-error
+            *ngIf="password.invalid && (password.dirty || password.touched)"
+          >
+            <span *ngIf="password.errors?.['required']"
+              >Ce champ est obligatoire</span
+            >
+            <span *ngIf="password.errors?.['minlength']">
+              Ce champ doit contenir au minimum
+              {{ password.errors?.['minlength']?.requiredLength }} caractères
+            </span>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label for="confirmPassword">Confirmer Password</mat-label>
+          <mat-icon matPrefix>password</mat-icon>
+          <input
+            matInput
+            type="{{ hideConfirmPwd ? 'password' : 'text' }}"
+            id="confirmPassword"
+            name="confirmPassword"
+            #confirmPassword="ngModel"
+            [(ngModel)]="compteForm.confirmPassword"
+            (ngModelChange)="validatePasswords()"
+            required
+          />
+          <!-- <input
+            matInput
+            type="{{ hideConfirmPwd ? 'password' : 'text' }}"
+            id="confirmPassword"
+            name="confirmPassword"
+            #confirmPassword="ngModel"
+            [(ngModel)]="compteForm.confirmPassword"
+            required
+            confirmPassword="confirmPassword"
+          /> -->
+          <mat-icon
+            matSuffix
+            (click)="hideConfirmPwd = !hideConfirmPwd"
+            aria-label="Toggle password visibility"
+            [attr.aria-pressed]="!hideConfirmPwd"
+          >
+            {{ hideConfirmPwd ? "visibility_off" : "visibility" }}
+          </mat-icon>
+
+          <mat-error
+            *ngIf="
+              confirmPassword.invalid &&
+              (confirmPassword.dirty || confirmPassword.touched)
+            "
+          >
+            <span *ngIf="confirmPassword.errors?.['required']"
+              >Ce champ est obligatoire</span
+            >
+          </mat-error>
+
+          <mat-hint *ngIf="!passwordsMatch">
+            Password et Confirmer Password ne correspondent pas
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <mat-checkbox
+        name="access"
+        [(ngModel)]="compteForm.access"
+        labelPosition="before"
+        >Accès :</mat-checkbox
+      >
+
+      <mat-form-field appearance="fill">
+        <mat-label>Role</mat-label>
+        <mat-icon matPrefix>group</mat-icon>
+        <mat-select
+          name="role"
+          #role="ngModel"
+          [(ngModel)]="compteForm.nomRole"
+          required
+        >
+          <!-- use 'async' pipe to subscribe to the roles observable in the template -->
+          <mat-option
+            *ngFor="let role of roles$ | async"
+            [value]="role.nomRole"
+            >{{ role.nomRole }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="role.touched && role.pristine">
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Filiale</mat-label>
+        <mat-icon matPrefix>group</mat-icon>
+        <mat-select
+          name="filiale"
+          #filiale="ngModel"
+          [(ngModel)]="compteForm.nomFiliale"
+          required
+        >
+          <mat-option
+            *ngFor="let filiale of filiales$ | async"
+            [value]="filiale.nomFiliale"
+            >{{ filiale.nomFiliale }}</mat-option
+          >
+        </mat-select>
+        <mat-error *ngIf="filiale.touched && filiale.pristine">
+          Ce champ est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="
+          form.invalid || (!isEditMode && !passwordsMatch) || isLoading
+        "
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button>
+      <!-- <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        class="form-submit-btn"
+        [disabled]="form.invalid || !isEditMode || isLoading"
+      >
+        {{ isEditMode ? "Modifier" : "Ajouter" }}
+      </button> -->
+
+      <mat-progress-bar mode="indeterminate" *ngIf="isLoading" />
+    </form>
+  </mat-card-content>
+  <!-- {{ form.value | json }} -->
+</mat-card>

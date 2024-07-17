@@ -1,0 +1,22 @@
+mat-sidenav-container {
+  height: 100%; // take the full height of the page
+}
+
+.menu-items {
+  display: flex;
+  flex-direction: column;
+  //align-items: center;
+  //height: 100%;
+  padding: 10px;
+}
+
+button {
+  width: 100%;
+
+  &:hover,
+  &.active {
+    // background-color: whitesmoke;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+  }
+}

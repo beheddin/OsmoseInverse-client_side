@@ -1,0 +1,52 @@
+<mat-sidenav-container>
+  <!-- mat-sidenav modes="over/push/side -->
+  <mat-sidenav mode="side" [opened]="isSidenavOpen">
+    <div class="menu-items" *ngFor="let item of menuBtnItems">
+      <!-- if it's a btn -->
+      <div *ngIf="!item.subItems; else expansionPanel">
+        <button
+          mat-raised-button
+          routerLinkActive="active"
+          [routerLink]="[item.route]"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          {{ item.label }}
+        </button>
+      </div>
+
+      <!-- if it's an expansion panel -->
+      <ng-template #expansionPanel>
+        <!-- expansion panel not as a component -->
+        <!-- <mat-expansion-panel
+          (opened)="isPanelOpen = true"
+          (closed)="isPanelOpen = false"
+        >
+          <mat-expansion-panel-header>
+            <mat-panel-title>{{ item.label }}</mat-panel-title>
+          </mat-expansion-panel-header>
+          <div *ngFor="let subItem of item.subItems">
+            <button
+              mat-button
+              routerLinkActive="active"
+              [routerLink]="[subItem.route]"
+            >
+              Paramétrage des {{ subItem.label }}
+            </button>
+          </div>
+        </mat-expansion-panel> -->
+
+        <!-- expansion panel as a component -->
+        <app-expansion-panel
+          [label]="item.label"
+          [subItems]="item.subItems ?? []"
+        />
+      </ng-template>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- <main class="content-container"> -->
+    <main>
+      <router-outlet />
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

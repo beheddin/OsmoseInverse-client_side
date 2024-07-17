@@ -1,0 +1,28 @@
+@defer() {
+<app-apex-chart
+  [chart]="chart"
+  [annotations]="annotations"
+  [colors]="colors"
+  [dataLabels]="dataLabels"
+  [series]="series"
+  [stroke]="stroke"
+  [labels]="labels"
+  [legend]="legend"
+  [markers]="markers"
+  [noData]="noData"
+  [fill]="fill"
+  [tooltip]="tooltip"
+  [plotOptions]="plotOptions"
+  [responsive]="responsive"
+  [xaxis]="xaxis"
+  [yaxis]="yaxis"
+  [forecastDataPoints]="forecastDataPoints"
+  [grid]="grid"
+  [states]="states"
+  [title]="title"
+  [subtitle]="subtitle"
+  [theme]="theme"
+  [autoUpdateSeries]="autoUpdateSeries"
+  (chartReady)="chartReady.next($event)"
+/>
+}

@@ -1,0 +1,38 @@
+<mat-expansion-panel
+  (opened)="isPanelOpen = true"
+  (closed)="isPanelOpen = false"
+>
+  <mat-expansion-panel-header>
+    <mat-panel-title>{{ label }}</mat-panel-title>
+  </mat-expansion-panel-header>
+  <!-- if there is no nested expansion panel inside this expansion panel -->
+  <div *ngFor="let subItem of subItems">
+    <button
+      mat-button
+      routerLinkActive="active"
+      [routerLink]="[subItem.route]"
+      [routerLinkActiveOptions]="{ exact: false }"
+    >
+      {{ subItem.label }}
+    </button>
+  </div>
+
+  <!-- if there is a nested expansion panel inside this expansion panel -->
+  <!-- <div *ngFor="let subItem of subItems">
+    <div *ngIf="!subItem.subItems; else nestedPanel">
+      <button
+        mat-button
+        routerLinkActive="active"
+        [routerLink]="[subItem.route]"
+      >
+        Paramétrage des {{ subItem.label }}
+      </button>
+    </div>
+    <ng-template #nestedPanel>
+      <app-expansion-panel
+        [label]="subItem.label"
+        [subItems]="subItem.subItems ?? []"
+      />
+    </ng-template>
+  </div> -->
+</mat-expansion-panel>
