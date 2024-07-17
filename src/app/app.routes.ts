@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { DashboardComponent } from './Components/Module-Paramétrage-Et-Suivi/dashboard/dashboard.component';
 import { ErrorPageComponent } from './Components/error-page/error-page.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ProfileComponent } from './Components/profile/profile.component';
