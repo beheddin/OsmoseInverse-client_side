@@ -1,0 +1,52 @@
+<app-add-edit-section>
+  <router-outlet />
+</app-add-edit-section>
+
+<div class="table-container">
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="sortData($event)"
+    class="full-width-table"
+  >
+    <ng-container matColumnDef="labelChecklist">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Checklist</th>
+      <td mat-cell *matCellDef="let checklist">
+        {{ checklist.labelChecklist }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nomStation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Station</th>
+      <td mat-cell *matCellDef="let checklist">
+        {{ checklist.nomStation }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let checklist">
+        <div class="actions-btns-container">
+          <button
+            mat-fab
+            class="action-btn edit"
+            routerLink="edit/{{ checklist.idChecklist }}"
+          >
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button
+            mat-fab
+            class="action-btn delete"
+            (click)="openDialog(checklist)"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>

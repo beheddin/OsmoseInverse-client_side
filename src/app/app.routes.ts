@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './Components/dashboard/dashboard.component';
+import { DashboardComponent } from './Components/Module-Suivi/dashboard/dashboard.component';
 import { ErrorPageComponent } from './Components/error-page/error-page.component';
 import { LoginComponent } from './Components/login/login.component';
 import { ProfileComponent } from './Components/profile/profile.component';
@@ -47,18 +47,18 @@ import { LavagesChimiquesComponent } from './Components/Module-Gestion-Entretien
 import { LavageChimiqueFormComponent } from './Components/Module-Gestion-Entretiens-Et-Lavages/lavages-chimiques/lavage-chimique-form/lavage-chimique-form.component';
 import { DosagesChimiquesComponent } from './Components/Module-Paramétrage/dosages-chimiques/dosages-chimiques.component';
 import { DosageChimiqueFormComponent } from './Components/Module-Paramétrage/dosages-chimiques/dosage-chimique-form/dosage-chimique-form.component';
-import { ParametresStationsComponent } from './Components/Module-Paramétrage-Et-Suivi/parametres-stations/parametres-stations.component';
-import { ParametreStationFormComponent } from './Components/Module-Paramétrage-Et-Suivi/parametres-stations/parametre-station-form/parametre-station-form.component';
-import { ParametresSuivisComponent } from './Components/Module-Paramétrage-Et-Suivi/parametres-suivis/parametres-suivis.component';
-import { ParametreSuiviFormComponent } from './Components/Module-Paramétrage-Et-Suivi/parametres-suivis/parametre-suivi-form/parametre-suivi-form.component';
-import { TypesSuivisComponent } from './Components/Module-Paramétrage-Et-Suivi/types-suivis/types-suivis.component';
-import { TypeSuiviFormComponent } from './Components/Module-Paramétrage-Et-Suivi/types-suivis/type-suivi-form/type-suivi-form.component';
-import { SuivisQuotidiensComponent } from './Components/Module-Paramétrage-Et-Suivi/suivis-quotidiens/suivis-quotidiens.component';
-import { SuiviQuotidienFormComponent } from './Components/Module-Paramétrage-Et-Suivi/suivis-quotidiens/suivi-quotidien-form/suivi-quotidien-form.component';
-import { ObjectifsComponent } from './Components/Module-Paramétrage-Et-Suivi/objectifs/objectifs.component';
-import { ObjectifFormComponent } from './Components/Module-Paramétrage-Et-Suivi/objectifs/objectif-form/objectif-form.component';
-import { ChecklistsComponent } from './Components/Module-Paramétrage-Et-Suivi/checklists/checklists.component';
-import { ChecklistFormComponent } from './Components/Module-Paramétrage-Et-Suivi/checklists/checklist-form/checklist-form.component';
+import { ParametresStationsComponent } from './Components/Module-Suivi/parametres-stations/parametres-stations.component';
+import { ParametreStationFormComponent } from './Components/Module-Suivi/parametres-stations/parametre-station-form/parametre-station-form.component';
+import { ParametresSuivisComponent } from './Components/Module-Suivi/parametres-suivis/parametres-suivis.component';
+import { ParametreSuiviFormComponent } from './Components/Module-Suivi/parametres-suivis/parametre-suivi-form/parametre-suivi-form.component';
+import { TypesSuivisComponent } from './Components/Module-Suivi/types-suivis/types-suivis.component';
+import { TypeSuiviFormComponent } from './Components/Module-Suivi/types-suivis/type-suivi-form/type-suivi-form.component';
+import { SuivisQuotidiensComponent } from './Components/Module-Suivi/suivis-quotidiens/suivis-quotidiens.component';
+import { SuiviQuotidienFormComponent } from './Components/Module-Suivi/suivis-quotidiens/suivi-quotidien-form/suivi-quotidien-form.component';
+import { ObjectifsComponent } from './Components/Module-Suivi/objectifs/objectifs.component';
+import { ObjectifFormComponent } from './Components/Module-Suivi/objectifs/objectif-form/objectif-form.component';
+import { ChecklistsComponent } from './Components/Module-Suivi/checklists/checklists.component';
+import { ChecklistFormComponent } from './Components/Module-Suivi/checklists/checklist-form/checklist-form.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, //default route
